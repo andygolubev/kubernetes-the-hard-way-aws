@@ -4,8 +4,8 @@ variable "region" {
 }
 
 variable "arch" {
-    type = string
-    default = "amd64"
+  type    = string
+  default = "amd64"
 }
 
 variable "instance_type" {
