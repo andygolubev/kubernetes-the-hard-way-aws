@@ -5,3 +5,4 @@ resource "aws_vpc" "this" {
 output "vpc-arn" {
     value = aws_vpc.this.arn
 }
+
