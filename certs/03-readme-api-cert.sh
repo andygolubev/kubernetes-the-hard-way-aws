@@ -1,6 +1,12 @@
-# We have generated all of the the client certificates our Kubernetes cluster will need, but we also need a server certificate for the Kubernetes API. In this lesson, we will generate one, signed with all of the hostnames and IPs that may be used later in order to access the Kubernetes API. After completing this lesson, you will have a Kubernetes API server certificate in the form of two files called kubernetes-key.pem  and kubernetes.pem .
+# From A Cloud Guru course "Kubernetes the Hard Way" https://www.pluralsight.com/cloud-guru/courses/kubernetes-the-hard-way
 
-# Here are the commands used in the demo. Be sure to replace all the placeholder values in CERT_HOSTNAME with their real values from your cloud servers:
+# We have generated all of the the client certificates our Kubernetes cluster will need, but we also need a server certificate 
+# for the Kubernetes API. In this lesson, we will generate one, signed with all of the hostnames and IPs that may be used later 
+# in order to access the Kubernetes API. After completing this lesson, you will have a Kubernetes API server certificate in the 
+# form of two files called kubernetes-key.pem  and kubernetes.pem .
+
+# Here are the commands used in the demo. Be sure to replace all the placeholder values in CERT_HOSTNAME with their real values 
+# from your cloud servers:
 
 cd ~/kthw
 

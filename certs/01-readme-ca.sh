@@ -1,6 +1,8 @@
 # From A Cloud Guru course "Kubernetes the Hard Way" https://www.pluralsight.com/cloud-guru/courses/kubernetes-the-hard-way
 
-# In order to generate the certificates needed by Kubernetes, you must first provision a certificate authority. This lesson will guide you through the process of provisioning a new certificate authority for your Kubernetes cluster. After completing this lesson, you should have a certificate authority, which consists of two files: ca-key.pem and ca.pem.
+# In order to generate the certificates needed by Kubernetes, you must first provision a certificate authority. 
+# This lesson will guide you through the process of provisioning a new certificate authority for your Kubernetes 
+# cluster. After completing this lesson, you should have a certificate authority, which consists of two files: ca-key.pem and ca.pem.
 
 # Here are the commands used in the demo:
 
