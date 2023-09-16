@@ -17,17 +17,17 @@ build {
   ]
 
   provisioner "shell" {
-    inline = ["sudo mkdir --mode=770 -p /etc/kubernetes/certs"]
+    inline = ["sudo mkdir --mode=770 -p /etc/kubernetes/certs", "ls -la /etc/kubernetes/certs"]
   }
 
-  provisioner "file" {
-    sources      = ["/tmp/kthw-certs/ca-key.pem", 
-                    "/tmp/kthw-certs/kubernetes-key.pem", 
-                    "/tmp/kthw-certs/kubernetes.pem", 
-                    "/tmp/kthw-certs/service-account-key.pem", 
-                    "/tmp/kthw-certs/service-account.pem" ]
-    destination = "/etc/kubernetes/certs/"
-  }
+  # provisioner "file" {
+  #   sources      = ["/tmp/kthw-certs/ca-key.pem", 
+  #                   "/tmp/kthw-certs/kubernetes-key.pem", 
+  #                   "/tmp/kthw-certs/kubernetes.pem", 
+  #                   "/tmp/kthw-certs/service-account-key.pem", 
+  #                   "/tmp/kthw-certs/service-account.pem" ]
+  #   destination = "/etc/kubernetes/certs/"
+  # }
 
   provisioner "shell" {
     inline = ["sudo apt -y update",
