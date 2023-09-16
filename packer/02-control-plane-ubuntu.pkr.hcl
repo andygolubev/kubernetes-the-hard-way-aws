@@ -17,7 +17,7 @@ build {
   ]
 
   provisioner "shell" {
-    inline = ["sudo mkdir -p /etc/kubernetes/certs"]
+    inline = ["sudo mkdir --mode=770 -p /etc/kubernetes/certs"]
   }
 
   provisioner "file" {
