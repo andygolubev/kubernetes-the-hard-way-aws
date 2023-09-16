@@ -16,7 +16,7 @@ curl -s -L -o /tmp/kthw-certs/cfssljson https://pkg.cfssl.org/R1.2/cfssljson_lin
 curl -s -L -o /tmp/kthw-certs/cfssl-certinfo https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
 
 chmod +x /tmp/kthw-certs/cfssl*
-PATH=/tmp/kthw-certs:$PATH
+export PATH=/tmp/kthw-certs:$PATH
 
 # Use this command to generate the certificate authority. Include the opening and closing curly braces to run this entire block as a single command.
 

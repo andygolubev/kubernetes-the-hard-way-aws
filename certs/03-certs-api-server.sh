@@ -8,7 +8,7 @@
 # Here are the commands used in the demo. Be sure to replace all the placeholder values in CERT_HOSTNAME with their real values 
 # from your cloud servers:
 
-cd ~/kthw
+cd /tmp/kthw-certs
 
 
 # add all control planes, load balancers
