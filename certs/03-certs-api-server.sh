@@ -12,7 +12,7 @@ cd /tmp/kthw-certs
 
 
 # add all control planes, load balancers
-CERT_HOSTNAME=10.32.0.1,127.0.0.1,localhost,kubernetes.default,172.20.0.5,control-plane-0,172.20.16.5,control-plane-1,172.20.0.7,load-balancer-0
+CERT_HOSTNAME=10.32.0.1,127.0.0.1,localhost,kubernetes.default,172.20.0.5,control-plane-0,172.20.16.5,control-plane-1,172.20.32.5,control-plane-2,172.20.0.4,load-balancer-internal
 
 {
 

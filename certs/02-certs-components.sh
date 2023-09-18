@@ -46,12 +46,12 @@ admin-csr.json | cfssljson -bare admin
 
 # Kubelet Client certificates. Be sure to enter your actual cloud server values for all four of the variables at the top:
 
-WORKER0_HOST=working-node-00
-WORKER0_IP=172.20.0.8
-WORKER1_HOST=working-node-10
-WORKER1_IP=172.20.16.8
-WORKER2_HOST=working-node-20
-WORKER2_IP=172.20.32.8
+WORKER0_HOST=working-node-0
+WORKER0_IP=172.20.0.7
+WORKER1_HOST=working-node-1
+WORKER1_IP=172.20.16.7
+WORKER2_HOST=working-node-2
+WORKER2_IP=172.20.32.7
 
 {
 cat > ${WORKER0_HOST}-csr.json << EOF
