@@ -58,20 +58,29 @@ build {
     inline = ["ls -la /etc/kubernetes/certs /etc/etcd /etc/kubernetes/config"]
   }
 
+  # provisioner "shell" {
+  #   inline = ["sudo apt -y update",
+  #     "wget http://apt.puppet.com/puppet8-release-jammy.deb",
+  #     "sudo dpkg -i puppet8-release-jammy.deb",
+  #     "sudo apt -y update",
+  #     "sudo apt -y install puppet-agent",
+  #     "echo 'Defaults secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/opt/puppetlabs/bin' | sudo tee -a /etc/sudoers.d/extra",
+  #     "bash"
+  #   ]
+  # }
+
+
   provisioner "shell" {
     inline = ["sudo apt -y update",
-      "wget http://apt.puppet.com/puppet8-release-jammy.deb",
-      "sudo dpkg -i puppet8-release-jammy.deb",
-      "sudo apt -y update",
-      "sudo apt -y install puppet-agent",
-      "echo 'Defaults secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/opt/puppetlabs/bin' | sudo tee -a /etc/sudoers.d/extra",
-      "bash"
+      "wget -q --show-progress --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.4.27/etcd-v3.4.27-linux-amd64.tar.gz",
+      "tar -xvf etcd-v3.3.5-linux-amd64.tar.gz",
+      "sudo mv etcd-v3.4.27-linux-amd64/etcd* /usr/local/bin/"
     ]
   }
 
-  provisioner "puppet-masterless" {
-    manifest_file = "../puppet/configure-control-plane-1.pp"
-  }
+  # provisioner "puppet-masterless" {
+  #   manifest_file = "../puppet/configure-control-plane-1.pp"
+  # }
 
   post-processor "manifest" {
     output     = "manifest-control-plane-1.json"
