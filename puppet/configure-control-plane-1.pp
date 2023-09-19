@@ -3,6 +3,11 @@ exec { 'update package lists':
   refreshonly => true,
 }
 
+package { 'nginx':
+  ensure => installed,
+}
+
+
 package { 'wget':
   ensure => installed,
 }
@@ -29,9 +34,6 @@ exec { 'install etcd':
 }
 
 
-package { 'nginx':
-  ensure => installed,
-}
 
 file { '/home/ubuntu/file.txt':
   ensure  => present,
