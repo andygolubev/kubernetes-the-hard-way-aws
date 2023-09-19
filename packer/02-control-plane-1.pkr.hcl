@@ -58,7 +58,7 @@ build {
   }
 
   provisioner "puppet-masterless" {
-    manifest_file = "../puppet/configure-control-plane.pp"
+    manifest_file = "../puppet/configure-control-plane-1.pp"
   }
 
   post-processor "manifest" {
