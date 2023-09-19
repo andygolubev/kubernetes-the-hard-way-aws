@@ -41,7 +41,7 @@ build {
     sources      = ["/tmp/kthw-certs/ca.pem", 
                     "/tmp/kthw-certs/kubernetes-key.pem", 
                     "/tmp/kthw-certs/kubernetes.pem" ]
-    destination = "/etc/etcd"
+    destination = "/etc/etcd/"
   }
 
 
