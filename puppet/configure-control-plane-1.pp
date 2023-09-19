@@ -1,5 +1,14 @@
-exec { 'update_package_lists':
+exec { 'update package lists':
   command => '/usr/bin/sudo /usr/bin/apt update -y',
+  refreshonly => true,
+}
+
+package { 'wget':
+  ensure => installed,
+}
+
+exec { 'install tools':
+  command => '/usr/bin/sudo /usr/bin/apt install -y wget',
   refreshonly => true,
 }
 
