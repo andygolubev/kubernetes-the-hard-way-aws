@@ -25,7 +25,8 @@ build {
               "sudo mkdir -p /etc/etcd",
               "sudo chown ubuntu:ubuntu /etc/etcd",
               "sudo mkdir -p /var/lib/etcd",
-              "sudo chown ubuntu:ubuntu /var/lib/etcd"]
+              "sudo chown ubuntu:ubuntu /var/lib/etcd",
+              "ls -la /etc/etcd"]
   }
 
   provisioner "file" {
@@ -54,7 +55,7 @@ build {
   }
 
   provisioner "shell" {
-    inline = ["ls -la /etc/kubernetes/certs"]
+    inline = ["ls -la /etc/kubernetes/certs /etc/etcd /etc/kubernetes/config"]
   }
 
   provisioner "shell" {
