@@ -1,3 +1,5 @@
+# From A Cloud Guru course "Kubernetes the Hard Way" https://www.pluralsight.com/cloud-guru/courses/kubernetes-the-hard-way
+
 # In order to make use of Kubernetes' ability to encrypt sensitive data at rest, 
 # you need to provide Kubernetes with an encrpytion key using a data encryption config 
 # file. This lesson walks you through the process of creating a encryption key and storing 

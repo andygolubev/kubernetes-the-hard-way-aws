@@ -39,23 +39,23 @@ build {
   }
 
   provisioner "shell" {
-    inline = ["ls -la /etc/kubernetes/certs"]
+    inline = ["ls -la /etc/kubernetes/certs /etc/kubernetes/config"]
   }
 
-  provisioner "shell" {
-    inline = ["sudo apt -y update",
-      "wget http://apt.puppet.com/puppet8-release-jammy.deb",
-      "sudo dpkg -i puppet8-release-jammy.deb",
-      "sudo apt -y update",
-      "sudo apt -y install puppet-agent",
-      "echo 'Defaults secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/opt/puppetlabs/bin' | sudo tee -a /etc/sudoers.d/extra",
-      "bash"
-    ]
-  }
+  # provisioner "shell" {
+  #   inline = ["sudo apt -y update",
+  #     "wget http://apt.puppet.com/puppet8-release-jammy.deb",
+  #     "sudo dpkg -i puppet8-release-jammy.deb",
+  #     "sudo apt -y update",
+  #     "sudo apt -y install puppet-agent",
+  #     "echo 'Defaults secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/opt/puppetlabs/bin' | sudo tee -a /etc/sudoers.d/extra",
+  #     "bash"
+  #   ]
+  # }
 
-  provisioner "puppet-masterless" {
-    manifest_file = "../puppet/configure-working-node-1.pp"
-  }
+  # provisioner "puppet-masterless" {
+  #   manifest_file = "../puppet/configure-working-node-1.pp"
+  # }
 
   post-processor "manifest" {
     output     = "manifest-working-node-1.json"
