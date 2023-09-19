@@ -21,7 +21,11 @@ build {
               "sudo mkdir -p /etc/kubernetes/certs",
               "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
               "sudo mkdir -p /etc/kubernetes/config",
-              "sudo chown ubuntu:ubuntu /etc/kubernetes/config"]
+              "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
+              "sudo mkdir -p /etc/etcd",
+              "sudo chown ubuntu:ubuntu /etc/etcd",
+              "sudo mkdir -p /var/lib/etcd",
+              "sudo chown ubuntu:ubuntu /var/lib/etcd"]
   }
 
   provisioner "file" {
@@ -31,6 +35,13 @@ build {
                     "/tmp/kthw-certs/service-account-key.pem", 
                     "/tmp/kthw-certs/service-account.pem" ]
     destination = "/etc/kubernetes/certs/"
+  }
+
+  provisioner "file" {
+    sources      = ["/tmp/kthw-certs/ca.pem", 
+                    "/tmp/kthw-certs/kubernetes-key.pem", 
+                    "/tmp/kthw-certs/kubernetes.pem" ]
+    destination = "/etc/etcd"
   }
 
 
@@ -62,13 +73,11 @@ build {
   }
 
   post-processor "manifest" {
-    output     = "manifest.json"
+    output     = "manifest-control-plane-1.json"
     strip_path = true
   }
 
   // jq -r '.builds[0].artifact_id|split(":")[1]' ./manifest.json 
-
-
 
 }
 

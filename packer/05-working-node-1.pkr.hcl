@@ -58,7 +58,7 @@ build {
   }
 
   post-processor "manifest" {
-    output     = "manifest.json"
+    output     = "manifest-working-node-1.json"
     strip_path = true
   }
 
