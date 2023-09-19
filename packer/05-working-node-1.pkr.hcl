@@ -19,16 +19,23 @@ build {
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
               "sudo mkdir -p /etc/kubernetes/certs",
-              "sudo chown ubuntu:ubuntu /etc/kubernetes/certs"]
+              "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
+              "sudo mkdir -p /etc/kubernetes/config",
+              "sudo chown ubuntu:ubuntu /etc/kubernetes/config"]
+  }
+
+
+  provisioner "file" {
+    sources      = ["/tmp/kthw-certs/ca.pem", 
+                    "/tmp/kthw-certs/working-node-0-key.pem", 
+                    "/tmp/kthw-certs/working-node-0.pem"]
+    destination = "/etc/kubernetes/certs/"
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/ca-key.pem", 
-                    "/tmp/kthw-certs/kubernetes-key.pem", 
-                    "/tmp/kthw-certs/kubernetes.pem", 
-                    "/tmp/kthw-certs/service-account-key.pem", 
-                    "/tmp/kthw-certs/service-account.pem" ]
-    destination = "/etc/kubernetes/certs/"
+    sources      = ["/tmp/kthw-certs/working-node-0.kubeconfig",
+                    "/tmp/kthw-certs/kube-proxy.kubeconfig" ]
+    destination = "/etc/kubernetes/config/"
   }
 
   provisioner "shell" {

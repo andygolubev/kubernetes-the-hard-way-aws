@@ -19,7 +19,9 @@ build {
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
               "sudo mkdir -p /etc/kubernetes/certs",
-              "sudo chown ubuntu:ubuntu /etc/kubernetes/certs"]
+              "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
+              "sudo mkdir -p /etc/kubernetes/config",
+              "sudo chown ubuntu:ubuntu /etc/kubernetes/config"]
   }
 
   provisioner "file" {
@@ -29,6 +31,15 @@ build {
                     "/tmp/kthw-certs/service-account-key.pem", 
                     "/tmp/kthw-certs/service-account.pem" ]
     destination = "/etc/kubernetes/certs/"
+  }
+
+
+  provisioner "file" {
+    sources      = ["/tmp/kthw-certs/admin.kubeconfig",
+                    "/tmp/kthw-certs/kube-controller-manager.kubeconfig",
+                    "/tmp/kthw-certs/kube-scheduler.kubeconfig",
+                    "/tmp/kthw-certs/encryption-config.yaml" ]
+    destination = "/etc/kubernetes/config/"
   }
 
   provisioner "shell" {
