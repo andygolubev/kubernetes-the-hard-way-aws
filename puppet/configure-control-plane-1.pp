@@ -18,13 +18,13 @@ exec { 'install tools':
 }
 
 exec { 'download etcd':
-  command => 'wget -q --show-progress --https-only --timestamping \
+  command => '/usr/bin/wget -q --show-progress --https-only --timestamping \
  "https://github.com/etcd-io/etcd/releases/download/v3.4.27/etcd-v3.4.27-linux-amd64.tar.gz',
   refreshonly => true,
 }
 
 exec { 'unzip etcd':
-  command => 'tar -xvf etcd-v3.3.5-linux-amd64.tar.gz',
+  command => '/usr/bin/tar -xvf etcd-v3.3.5-linux-amd64.tar.gz',
   refreshonly => true,
 }
 
