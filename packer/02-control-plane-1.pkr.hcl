@@ -1,4 +1,4 @@
-source "amazon-ebs" "ubuntu-kubernetes-the-hard-way" {
+source "amazon-ebs" "ubuntu-kubernetes-the-hard-way-control-plane-1" {
 
   profile       = "default"
   region        = var.region
@@ -13,7 +13,7 @@ source "amazon-ebs" "ubuntu-kubernetes-the-hard-way" {
 build {
   name = "k8s-control-plane-1"
   sources = [
-    "source.amazon-ebs.ubuntu-kubernetes-the-hard-way"
+    "source.amazon-ebs.ubuntu-kubernetes-the-hard-way-control-plane-1"
   ]
 
   provisioner "shell" {

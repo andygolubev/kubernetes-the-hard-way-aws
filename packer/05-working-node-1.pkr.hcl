@@ -1,7 +1,19 @@
+source "amazon-ebs" "ubuntu-kubernetes-the-hard-way-working-node-1" {
+
+  profile       = "default"
+  region        = var.region
+  instance_type = var.instance_type
+  source_ami    = data.amazon-ami.ubuntu.id
+
+  ami_name = "k8s-working-node-1-{{timestamp}}"
+
+  ssh_username = "ubuntu"
+}
+
 build {
   name = "k8s-working-node-1"
   sources = [
-    "source.amazon-ebs.ubuntu-kubernetes-the-hard-way"
+    "source.amazon-ebs.ubuntu-kubernetes-the-hard-way-working-node-1"
   ]
 
   provisioner "shell" {
