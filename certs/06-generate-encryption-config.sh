@@ -10,6 +10,8 @@
 
 # Generate the Kubernetes Data encrpytion config file containing the encrpytion key:
 
+cd /tmp/kthw-certs
+
 ENCRYPTION_KEY=$(head -c 32 /dev/urandom | base64)
 
 cat > encryption-config.yaml << EOF

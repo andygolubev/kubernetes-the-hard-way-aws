@@ -9,6 +9,8 @@
 
 # Create an environment variable to store the address of the Kubernetes API, and set it to the private IP of your load balancer cloud server:
 
+cd /tmp/kthw-certs
+
 KUBERNETES_ADDRESS=172.20.0.4
 
 # Generate a kubelet kubeconfig for each worker node:
