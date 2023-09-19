@@ -8,3 +8,15 @@ data "amazon-ami" "ubuntu" {
   most_recent = true
   region      = var.region
 }
+
+source "amazon-ebs" "ubuntu-kubernetes-the-hard-way" {
+
+  profile       = "default"
+  region        = var.region
+  instance_type = var.instance_type
+  source_ami    = data.amazon-ami.ubuntu.id
+
+  ami_name = "k8s-control-plane-1-{{timestamp}}"
+
+  ssh_username = "ubuntu"
+}
