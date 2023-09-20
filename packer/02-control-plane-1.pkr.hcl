@@ -7,7 +7,7 @@ source "amazon-ebs" "ubuntu-kubernetes-the-hard-way-control-plane-1" {
 
   ami_name = "k8s-control-plane-1-{{timestamp}}"
 
-  ssh_username = "root"
+  ssh_username = "ubuntu"
 }
 
 build {
@@ -19,14 +19,15 @@ build {
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
               "mkdir -p /etc/kubernetes/certs",
-              "chown ubuntu:ubuntu /etc/kubernetes/certs",
-              "mkdir -p /etc/kubernetes/config",
-              "chown ubuntu:ubuntu /etc/kubernetes/config",
-              "mkdir -p /etc/etcd",
-              "chown ubuntu:ubuntu /etc/etcd",
-              "mkdir -p /var/lib/etcd",
-              "chown ubuntu:ubuntu /var/lib/etcd",
-              "ls -la /etc/etcd"]
+              "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
+              "sudo mkdir -p /etc/kubernetes/config",
+              "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
+              "sudo mkdir -p /etc/etcd",
+              "sudo chown ubuntu:ubuntu /etc/etcd",
+              "sudo mkdir -p /var/lib/etcd",
+              "sudo chown ubuntu:ubuntu /var/lib/etcd",
+              "sudo touch /etc/systemd/system/etcd.service",
+              "sudo chown ubuntu:ubuntu /etc/systemd/system/etcd.service" ]
   }
 
   provisioner "file" {
