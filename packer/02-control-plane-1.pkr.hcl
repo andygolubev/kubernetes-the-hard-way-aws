@@ -18,7 +18,7 @@ build {
 
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
-              "mkdir -p /etc/kubernetes/certs",
+              "sudo mkdir -p /etc/kubernetes/certs",
               "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
               "sudo mkdir -p /etc/kubernetes/config",
               "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
