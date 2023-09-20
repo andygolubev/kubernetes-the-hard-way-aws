@@ -61,7 +61,7 @@ build {
   }
 
   provisioner "shell" {
-    inline = ["ls -la /etc/kubernetes/certs /etc/etcd /etc/kubernetes/config"]
+    inline = ["ls -la /etc/kubernetes/certs /etc/etcd /etc/kubernetes/config /etc/systemd/system/etcd.service"]
   }
 
   # provisioner "shell" {
@@ -83,6 +83,16 @@ build {
       "sudo mv etcd-v3.4.27-linux-amd64/etcd* /usr/local/bin/"
     ]
   }
+
+  provisioner "shell" {
+    inline = [
+      "sudo systemctl daemon-reload",
+      "sudo systemctl enable etcd",
+      "sudo systemctl start etcd",
+      "sudo systemctl status etcd"
+    ]
+  }
+
 
   # provisioner "puppet-masterless" {
   #   manifest_file = "../puppet/configure-control-plane-1.pp"
