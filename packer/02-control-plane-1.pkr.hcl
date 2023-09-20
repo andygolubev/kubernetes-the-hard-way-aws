@@ -7,7 +7,7 @@ source "amazon-ebs" "ubuntu-kubernetes-the-hard-way-control-plane-1" {
 
   ami_name = "k8s-control-plane-1-{{timestamp}}"
 
-  ssh_username = "ubuntu"
+  ssh_username = "root"
 }
 
 build {
@@ -18,14 +18,14 @@ build {
 
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
-              "sudo mkdir -p /etc/kubernetes/certs",
-              "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
-              "sudo mkdir -p /etc/kubernetes/config",
-              "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
-              "sudo mkdir -p /etc/etcd",
-              "sudo chown ubuntu:ubuntu /etc/etcd",
-              "sudo mkdir -p /var/lib/etcd",
-              "sudo chown ubuntu:ubuntu /var/lib/etcd",
+              "mkdir -p /etc/kubernetes/certs",
+              "chown ubuntu:ubuntu /etc/kubernetes/certs",
+              "mkdir -p /etc/kubernetes/config",
+              "chown ubuntu:ubuntu /etc/kubernetes/config",
+              "mkdir -p /etc/etcd",
+              "chown ubuntu:ubuntu /etc/etcd",
+              "mkdir -p /var/lib/etcd",
+              "chown ubuntu:ubuntu /var/lib/etcd",
               "ls -la /etc/etcd"]
   }
 
@@ -52,6 +52,11 @@ build {
                     "/tmp/kthw-certs/kube-scheduler.kubeconfig",
                     "/tmp/kthw-certs/encryption-config.yaml" ]
     destination = "/etc/kubernetes/config/"
+  }
+
+  provisioner "file" {
+    sources      = ["/tmp/kthw-certs/etcd.service-0" ]
+    destination = "/etc/systemd/system/etcd.service"
   }
 
   provisioner "shell" {

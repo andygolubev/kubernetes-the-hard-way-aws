@@ -8,6 +8,8 @@
 # Here are the commands used in the demo (note that these have to be run on both controller 
 # servers, with a few differences between them):
 
+cd /tmp/kthw-certs
+
 {
 
 INITIAL_CLUSTER=control-plane-0=https://172.20.0.5:2380,control-plane-1=https://172.20.16.5:2380,control-plane-2=https://172.20.32.5:2380
