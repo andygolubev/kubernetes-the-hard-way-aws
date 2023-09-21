@@ -30,6 +30,11 @@ build {
   }
 
   provisioner "file" {
+    sources = ["/tmp/kthw-certs/hosts"]
+    destination = "/tmp/"
+  }
+
+  provisioner "file" {
     sources = ["/tmp/kthw-certs/ca-key.pem",
       "/tmp/kthw-certs/ca.pem",
       "/tmp/kthw-certs/kubernetes-key.pem",
@@ -73,6 +78,10 @@ build {
 
   provisioner "shell" {
     inline = ["sudo mv /tmp/services/* /etc/systemd/system/"]
+  }
+
+  provisioner "shell" {
+    inline = ["cat /tmp/hosts >> /etc/hosts"]
   }
 
   provisioner "shell" {
@@ -128,6 +137,8 @@ build {
       "sudo systemctl enable kube-apiserver kube-controller-manager kube-scheduler",
       "sudo systemctl start kube-apiserver kube-controller-manager kube-scheduler",
       "sudo systemctl status kube-apiserver kube-controller-manager kube-scheduler",
+      "sudo ufw status",
+      "sudo ufw allow 6443",
       "kubectl get componentstatuses --kubeconfig /etc/kubernetes/config/admin.kubeconfig"
     ]
   }

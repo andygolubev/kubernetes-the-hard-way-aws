@@ -6,7 +6,6 @@
 
 # Here are the commands used in the demo:
 
-mkdir -p /tmp/kthw-certs
 cd /tmp/kthw-certs
 
 curl -s -L -o /tmp/kthw-certs/cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
