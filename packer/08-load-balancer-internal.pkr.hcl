@@ -16,23 +16,30 @@ build {
     "source.amazon-ebs.ubuntu-kubernetes-the-hard-way-load-balancer-internal"
   ]
 
+  # provisioner "shell" {
+  #   inline = ["echo current user $(whoami)",
+  #     "sudo apt update",
+  #     "sudo apt install -y nginx libnginx-mod-stream",
+  #     "sudo systemctl enable nginx",
+  #     "sudo mkdir -p /etc/nginx/tcpconf.d",
+  #     "echo 'include /etc/nginx/tcpconf.d/*;' | sudo tee -a /etc/nginx/nginx.conf",]
+  # }
+
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
       "sudo apt update",
       "sudo apt install -y nginx libnginx-mod-stream",
-      "sudo systemctl enable nginx",
-      "sudo mkdir -p /etc/nginx/tcpconf.d",
-      "echo 'include /etc/nginx/tcpconf.d/*;' | sudo tee -a /etc/nginx/nginx.conf",]
+      "sudo systemctl enable nginx"]
   }
 
   provisioner "file" {
-    sources = ["/tmp/kthw-certs/kubernetes.conf",
+    sources = ["/tmp/kthw-certs/nginx.conf",
       "/tmp/kthw-certs/hosts"]
     destination = "/tmp/"
   }
 
   provisioner "shell" {
-    inline = ["sudo mv /tmp/kubernetes.conf /etc/nginx/tcpconf.d/"]
+    inline = ["sudo mv -f /tmp/nginx.conf /etc/nginx/nginx.conf"]
   }
 
   provisioner "shell" {
