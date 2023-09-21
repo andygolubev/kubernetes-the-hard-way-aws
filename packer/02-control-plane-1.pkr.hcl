@@ -138,9 +138,12 @@ build {
       "sudo systemctl start kube-apiserver kube-controller-manager kube-scheduler",
       "sudo systemctl status kube-apiserver kube-controller-manager kube-scheduler",
       "sudo ufw status",
-      "sudo ufw allow 6443",
-      "kubectl get componentstatuses --kubeconfig /etc/kubernetes/config/admin.kubeconfig"
+      "sudo ufw allow 6443"
     ]
+  }
+
+  provisioner "shell" {
+    inline = ["kubectl get componentstatuses --kubeconfig /etc/kubernetes/config/admin.kubeconfig"]
   }
 
 
