@@ -81,7 +81,7 @@ build {
   }
 
   provisioner "shell" {
-    inline = ["sudo cat /tmp/hosts >> /etc/hosts"]
+    inline = ["cat /tmp/hosts | sudo tee -a /etc/hosts"]
   }
 
   provisioner "shell" {
