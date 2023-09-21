@@ -18,64 +18,64 @@ build {
 
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
-              "sudo mkdir -p /etc/kubernetes/certs",
-              "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
-              "sudo mkdir -p /etc/kubernetes/config",
-              "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
-              "sudo mkdir -p /etc/etcd",
-              "sudo chown ubuntu:ubuntu /etc/etcd",
-              "sudo mkdir -p /var/lib/etcd",
-              "sudo chown ubuntu:ubuntu /var/lib/etcd",
-              "sudo touch /etc/systemd/system/etcd.service",
-              "sudo chown ubuntu:ubuntu /etc/systemd/system/etcd.service" ]
+      "sudo mkdir -p /etc/kubernetes/certs",
+      "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
+      "sudo mkdir -p /etc/kubernetes/config",
+      "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
+      "sudo mkdir -p /etc/etcd",
+      "sudo chown ubuntu:ubuntu /etc/etcd",
+      "sudo mkdir -p /var/lib/etcd",
+      "sudo chown ubuntu:ubuntu /var/lib/etcd",
+      "sudo touch /etc/systemd/system/etcd.service",
+    "sudo chown ubuntu:ubuntu /etc/systemd/system/etcd.service"]
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/ca-key.pem",
-                    "/tmp/kthw-certs/ca.pem",
-                    "/tmp/kthw-certs/kubernetes-key.pem", 
-                    "/tmp/kthw-certs/kubernetes.pem", 
-                    "/tmp/kthw-certs/service-account-key.pem", 
-                    "/tmp/kthw-certs/service-account.pem" ]
+    sources = ["/tmp/kthw-certs/ca-key.pem",
+      "/tmp/kthw-certs/ca.pem",
+      "/tmp/kthw-certs/kubernetes-key.pem",
+      "/tmp/kthw-certs/kubernetes.pem",
+      "/tmp/kthw-certs/service-account-key.pem",
+    "/tmp/kthw-certs/service-account.pem"]
     destination = "/etc/kubernetes/certs/"
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/ca.pem", 
-                    "/tmp/kthw-certs/kubernetes-key.pem", 
-                    "/tmp/kthw-certs/kubernetes.pem" ]
+    sources = ["/tmp/kthw-certs/ca.pem",
+      "/tmp/kthw-certs/kubernetes-key.pem",
+    "/tmp/kthw-certs/kubernetes.pem"]
     destination = "/etc/etcd/"
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/admin.kubeconfig",
-                    "/tmp/kthw-certs/kube-controller-manager.kubeconfig",
-                    "/tmp/kthw-certs/kube-scheduler.kubeconfig",
-                    "/tmp/kthw-certs/encryption-config.yaml",
-                    "/tmp/kthw-certs/kube-scheduler.yaml"]
+    sources = ["/tmp/kthw-certs/admin.kubeconfig",
+      "/tmp/kthw-certs/kube-controller-manager.kubeconfig",
+      "/tmp/kthw-certs/kube-scheduler.kubeconfig",
+      "/tmp/kthw-certs/encryption-config.yaml",
+    "/tmp/kthw-certs/kube-scheduler.yaml"]
     destination = "/etc/kubernetes/config/"
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/etcd.service-0"] // replace
+    sources     = ["/tmp/kthw-certs/etcd.service-0"] // replace
     destination = "/etc/systemd/system/etcd.service"
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/kube-apiserver.service-0"] // replace
+    sources     = ["/tmp/kthw-certs/kube-apiserver.service-0"] // replace
     destination = "/etc/systemd/system/kube-apiserver.service"
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/kube-controller-manager.service"]
+    sources     = ["/tmp/kthw-certs/kube-controller-manager.service"]
     destination = "/etc/systemd/system/kube-controller-manager.service"
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/kube-scheduler.service"]
+    sources     = ["/tmp/kthw-certs/kube-scheduler.service"]
     destination = "/etc/systemd/system/kube-scheduler.service"
   }
-  
+
   provisioner "shell" {
     inline = ["ls -la /etc/kubernetes/certs /etc/etcd /etc/kubernetes/config /etc/systemd/system/"]
   }
@@ -112,7 +112,7 @@ build {
   provisioner "shell" {
     inline = [
       "mkdir -p /tmp/k8s-server-components",
-      "cd /tmp/k8s-server-components"
+      "cd /tmp/k8s-server-components",
       "wget https://cdn.dl.k8s.io/release/v1.28.2/kubernetes-server-linux-amd64.tar.gz",
       "tar -xvf kubernetes-server-linux-amd64.tar.gz",
       "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-apiserver /usr/local/bin/",
