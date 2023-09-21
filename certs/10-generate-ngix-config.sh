@@ -1,5 +1,6 @@
 # From A Cloud Guru course "Kubernetes the Hard Way" https://www.pluralsight.com/cloud-guru/courses/kubernetes-the-hard-way
 
+cd /tmp/kthw-certs
 
 # Set up some environment variables for the lead balancer config file:
 
