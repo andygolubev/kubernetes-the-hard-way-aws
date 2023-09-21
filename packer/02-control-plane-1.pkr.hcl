@@ -30,7 +30,8 @@ build {
   }
 
   provisioner "file" {
-    sources = ["/tmp/kthw-certs/hosts"]
+    sources = ["/tmp/kthw-certs/hosts",
+      "/tmp/kthw-certs/kubernetes.default.svc.cluster.local"]
     destination = "/tmp/"
   }
 
@@ -79,6 +80,7 @@ build {
   provisioner "shell" {
     inline = ["sudo mv /tmp/services/* /etc/systemd/system/"]
   }
+
 
   provisioner "shell" {
     inline = ["cat /tmp/hosts | sudo tee -a /etc/hosts"]
@@ -136,11 +138,19 @@ build {
       "sudo systemctl daemon-reload",
       "sudo systemctl enable kube-apiserver kube-controller-manager kube-scheduler",
       "sudo systemctl start kube-apiserver kube-controller-manager kube-scheduler",
-      "sudo systemctl status kube-apiserver kube-controller-manager kube-scheduler",
-      "sudo ufw status",
-      "sudo ufw allow 6443"
+      "sudo systemctl status kube-apiserver kube-controller-manager kube-scheduler"
     ]
   }
+
+  provisioner "shell" {
+    inline = [
+      "sudo apt update && apt install -y nginx",
+      "sudo mkdir -p /etc/nginx/sites-enabled/",
+      "sudo mv /tmp/kubernetes.default.svc.cluster.local /etc/nginx/sites-enabled/",
+      "sudo systemctl enable nginx",
+      "sudo systemctl restart nginx"]
+  }
+
 
   # provisioner "shell" {
   #   inline = ["kubectl get componentstatuses --kubeconfig /etc/kubernetes/config/admin.kubeconfig"]
