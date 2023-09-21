@@ -144,7 +144,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "sudo apt update && apt install -y nginx",
+      "sudo apt update && sudo apt install -y nginx",
       "sudo mkdir -p /etc/nginx/sites-enabled/",
       "sudo mv /tmp/kubernetes.default.svc.cluster.local /etc/nginx/sites-enabled/",
       "sudo systemctl enable nginx",
