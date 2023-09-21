@@ -142,9 +142,9 @@ build {
     ]
   }
 
-  provisioner "shell" {
-    inline = ["kubectl get componentstatuses --kubeconfig /etc/kubernetes/config/admin.kubeconfig"]
-  }
+  # provisioner "shell" {
+  #   inline = ["kubectl get componentstatuses --kubeconfig /etc/kubernetes/config/admin.kubeconfig"]
+  # }
 
 
   # provisioner "puppet-masterless" {
