@@ -19,7 +19,7 @@ build {
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
       "sudo apt update",
-      "sudo apt install -y nginx",
+      "sudo apt install -y nginx libnginx-mod-stream",
       "sudo systemctl enable nginx",
       "sudo mkdir -p /etc/nginx/tcpconf.d",
       "echo 'include /etc/nginx/tcpconf.d/*;' | sudo tee -a /etc/nginx/nginx.conf",]
