@@ -26,8 +26,7 @@ build {
       "sudo chown ubuntu:ubuntu /etc/etcd",
       "sudo mkdir -p /var/lib/etcd",
       "sudo chown ubuntu:ubuntu /var/lib/etcd",
-      "sudo touch /etc/systemd/system/etcd.service",
-    "sudo chown ubuntu:ubuntu /etc/systemd/system/etcd.service"]
+      "mkdir -p /tmp/services"]
   }
 
   provisioner "file" {
@@ -58,22 +57,22 @@ build {
 
   provisioner "file" {
     sources     = ["/tmp/kthw-certs/etcd.service-0"] // replace
-    destination = "/etc/systemd/system/etcd.service"
+    destination = "/tmp/services/etcd.service"
   }
 
   provisioner "file" {
     sources     = ["/tmp/kthw-certs/kube-apiserver.service-0"] // replace
-    destination = "/etc/systemd/system/kube-apiserver.service"
+    destination = "/tmp/services/kube-apiserver.service"
   }
 
   provisioner "file" {
-    sources     = ["/tmp/kthw-certs/kube-controller-manager.service"]
-    destination = "/etc/systemd/system/kube-controller-manager.service"
+    sources     = ["/tmp/kthw-certs/kube-controller-manager.service",
+      "/tmp/kthw-certs/kube-scheduler.service"]
+    destination = "/tmp/services/"
   }
 
-  provisioner "file" {
-    sources     = ["/tmp/kthw-certs/kube-scheduler.service"]
-    destination = "/etc/systemd/system/kube-scheduler.service"
+  provisioner "shell" {
+    inline = ["sudo mv /tmp/services/* /etc/systemd/system/"]
   }
 
   provisioner "shell" {
