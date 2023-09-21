@@ -148,7 +148,8 @@ build {
       "sudo mkdir -p /etc/nginx/sites-enabled/",
       "sudo mv /tmp/kubernetes.default.svc.cluster.local /etc/nginx/sites-enabled/",
       "sudo systemctl enable nginx",
-      "sudo systemctl restart nginx"]
+      "sudo systemctl restart nginx",
+      "sudo systemctl status nginx"]
   }
 
 
