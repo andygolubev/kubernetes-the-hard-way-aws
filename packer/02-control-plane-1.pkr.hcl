@@ -31,7 +31,8 @@ build {
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/ca-key.pem", 
+    sources      = ["/tmp/kthw-certs/ca-key.pem",
+                    "/tmp/kthw-certs/ca.pem",
                     "/tmp/kthw-certs/kubernetes-key.pem", 
                     "/tmp/kthw-certs/kubernetes.pem", 
                     "/tmp/kthw-certs/service-account-key.pem", 
@@ -56,7 +57,8 @@ build {
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/etcd.service-0" ]
+    sources      = ["/tmp/kthw-certs/etcd.service-0" 
+                    "kube-apiserver.service-0"] // replace
     destination = "/etc/systemd/system/etcd.service"
   }
 
@@ -92,6 +94,22 @@ build {
       "sudo systemctl status etcd"
     ]
   }
+
+  provisioner "shell" {
+    inline = [
+      "mkdir -p /tmp/k8s-server-components",
+      "cd /tmp/k8s-server-components"
+      "wget https://cdn.dl.k8s.io/release/v1.28.2/kubernetes-server-linux-amd64.tar.gz",
+      "tar -xvf kubernetes-server-linux-amd64.tar.gz",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-apiserver /usr/local/bin/",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-controller-manager /usr/local/bin/",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-scheduler /usr/local/bin/",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kubectl /usr/local/bin/",
+      "rm -rf /tmp/k8s-server-components"
+    ]
+  }
+
+
 
 
   # provisioner "puppet-masterless" {
