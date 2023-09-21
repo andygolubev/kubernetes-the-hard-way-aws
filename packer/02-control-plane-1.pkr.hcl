@@ -57,9 +57,13 @@ build {
   }
 
   provisioner "file" {
-    sources      = ["/tmp/kthw-certs/etcd.service-0" 
-                    "kube-apiserver.service-0"] // replace
+    sources      = ["/tmp/kthw-certs/etcd.service-0"] // replace
     destination = "/etc/systemd/system/etcd.service"
+  }
+
+  provisioner "file" {
+    sources      = ["kube-apiserver.service-0"] // replace
+    destination = "/etc/systemd/system/kube-apiserver.service"
   }
 
   provisioner "shell" {
