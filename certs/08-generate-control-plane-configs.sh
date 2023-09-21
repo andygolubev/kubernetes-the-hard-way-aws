@@ -188,5 +188,33 @@ WantedBy=multi-user.target
 EOF
 
 
+# Generate kube-scheduler config
+
+cat >  kube-scheduler.yaml << EOF
+apiVersion: componentconfig/v1alpha1
+kind: KubeSchedulerConfiguration
+clientConnection:
+  kubeconfig: "/etc/kubernetes/config/kube-scheduler.kubeconfig"
+leaderElection:
+  leaderElect: true
+EOF
+
+# Create the kube-scheduler systemd unit file:
+
+cat >  kube-scheduler.service << EOF
+[Unit]
+Description=Kubernetes Scheduler
+Documentation=https://github.com/kubernetes/kubernetes
+
+[Service]
+ExecStart=/usr/local/bin/kube-scheduler \\
+  --config=/etc/kubernetes/config/kube-scheduler.yaml \\
+  --v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
 
 }

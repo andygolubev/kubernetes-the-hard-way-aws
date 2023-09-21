@@ -47,12 +47,12 @@ build {
     destination = "/etc/etcd/"
   }
 
-
   provisioner "file" {
     sources      = ["/tmp/kthw-certs/admin.kubeconfig",
                     "/tmp/kthw-certs/kube-controller-manager.kubeconfig",
                     "/tmp/kthw-certs/kube-scheduler.kubeconfig",
-                    "/tmp/kthw-certs/encryption-config.yaml" ]
+                    "/tmp/kthw-certs/encryption-config.yaml",
+                    "/tmp/kthw-certs/kube-scheduler.yaml"]
     destination = "/etc/kubernetes/config/"
   }
 
@@ -62,12 +62,22 @@ build {
   }
 
   provisioner "file" {
-    sources      = ["kube-apiserver.service-0"] // replace
+    sources      = ["/tmp/kthw-certs/kube-apiserver.service-0"] // replace
     destination = "/etc/systemd/system/kube-apiserver.service"
   }
 
+  provisioner "file" {
+    sources      = ["/tmp/kthw-certs/kube-controller-manager.service"]
+    destination = "/etc/systemd/system/kube-controller-manager.service"
+  }
+
+  provisioner "file" {
+    sources      = ["/tmp/kthw-certs/kube-scheduler.service"]
+    destination = "/etc/systemd/system/kube-scheduler.service"
+  }
+  
   provisioner "shell" {
-    inline = ["ls -la /etc/kubernetes/certs /etc/etcd /etc/kubernetes/config /etc/systemd/system/etcd.service"]
+    inline = ["ls -la /etc/kubernetes/certs /etc/etcd /etc/kubernetes/config /etc/systemd/system/"]
   }
 
   # provisioner "shell" {
