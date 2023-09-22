@@ -118,7 +118,6 @@ Documentation=https://github.com/kubernetes/kubernetes
 ExecStart=/usr/local/bin/kube-apiserver \\
   --advertise-address=${INTERNAL_IP} \\
   --allow-privileged=true \\
-  --apiserver-count=3 \\
   --audit-log-maxage=30 \\
   --audit-log-maxbackup=3 \\
   --audit-log-maxsize=100 \\
@@ -137,9 +136,10 @@ ExecStart=/usr/local/bin/kube-apiserver \\
   --kubelet-certificate-authority=/etc/kubernetes/certs/ca.pem \\
   --kubelet-client-certificate=/etc/kubernetes/certs/kubernetes.pem \\
   --kubelet-client-key=/etc/kubernetes/certs/kubernetes-key.pem \\
-  --kubelet-https=true \\
-  --runtime-config=api/all \\
+  --runtime-config=api/all=true \\
   --service-account-key-file=/etc/kubernetes/certs/service-account.pem \\
+  --service-account-issuer=https://kubernetes.default.svc.cluster.local \\
+  --service-account-signing-key-file=/etc/kubernetes/certs/service-account-key.pem \\
   --service-cluster-ip-range=10.32.0.0/24 \\
   --service-node-port-range=30000-32767 \\
   --tls-cert-file=/etc/kubernetes/certs/kubernetes.pem \\
@@ -167,7 +167,6 @@ Documentation=https://github.com/kubernetes/kubernetes
 
 [Service]
 ExecStart=/usr/local/bin/kube-controller-manager \\
-  --address=0.0.0.0 \\
   --cluster-cidr=10.200.0.0/16 \\
   --cluster-name=kubernetes \\
   --cluster-signing-cert-file=/etc/kubernetes/certs/ca.pem \\
@@ -190,7 +189,7 @@ EOF
 # Generate kube-scheduler config
 
 cat >  kube-scheduler.yaml << EOF
-apiVersion: componentconfig/v1alpha1
+apiVersion: kubescheduler.config.k8s.io/v1
 kind: KubeSchedulerConfiguration
 clientConnection:
   kubeconfig: "/etc/kubernetes/config/kube-scheduler.kubeconfig"
