@@ -1,4 +1,4 @@
-name: Deploying the Telegram bot on AWS
+name: Deploying EC2 on AWS
 
 on:
   workflow_dispatch:
