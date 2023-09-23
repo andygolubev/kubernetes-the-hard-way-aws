@@ -1,4 +1,4 @@
-name: Create an infrastructure for a terraform state
+name: 01 Create an infrastructure for a terraform state
 
 on:
   workflow_dispatch:

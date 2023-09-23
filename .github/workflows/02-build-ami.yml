@@ -1,4 +1,4 @@
-name: Build AMIs with Packer
+name: 02 Build AMIs with Packer
 
 on:
   push:

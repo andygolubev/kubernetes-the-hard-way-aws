@@ -1,4 +1,4 @@
-name: Deploying EC2 on AWS
+name: 03 Deploying EC2 on AWS
 
 on:
   workflow_dispatch:
