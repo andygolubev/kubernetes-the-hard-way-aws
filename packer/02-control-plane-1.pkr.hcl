@@ -104,7 +104,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "wget -q --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.4.27/etcd-v3.4.27-linux-amd64.tar.gz",
+      "wget --quiet --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.4.27/etcd-v3.4.27-linux-amd64.tar.gz",
       "tar -xvf etcd-v3.4.27-linux-amd64.tar.gz",
       "sudo mv etcd-v3.4.27-linux-amd64/etcd* /usr/local/bin/"
     ]
@@ -123,7 +123,7 @@ build {
     inline = [
       "mkdir -p /tmp/k8s-server-components",
       "cd /tmp/k8s-server-components",
-      "wget https://cdn.dl.k8s.io/release/v1.28.2/kubernetes-server-linux-amd64.tar.gz",
+      "wget --quiet https://cdn.dl.k8s.io/release/v1.28.2/kubernetes-server-linux-amd64.tar.gz",
       "tar -xvf kubernetes-server-linux-amd64.tar.gz",
       "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-apiserver /usr/local/bin/",
       "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-controller-manager /usr/local/bin/",
