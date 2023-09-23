@@ -32,7 +32,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Prepare certs and config files
-      run: for i in $(ls ./scripts-for-certs-and-configs/); do bash ./scripts-for-certs-and-configs/$i; done
+      run: export PATH=/tmp/kthw-certs:$PATH; for i in $(ls ./scripts-for-certs-and-configs/); do bash ./scripts-for-certs-and-configs/$i; done
 
     - name: Packer Init
       run: packer init ./packer/
