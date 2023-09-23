@@ -32,41 +32,10 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Prepare certs and config files
-      run: for i in $(ls /certs/); do bash /certs/$i; done
+      run: for i in $(ls ./scripts-for-certs-and-configs/); do bash ./scripts-for-certs-and-configs/$i; done
 
     - name: Packer Init
       run: packer init ./packer/
 
     - name: Packer Build
       run: packer build ./packer/
-
-  terraform:
-    name: 'Deploy EC2 on AWS'
-    runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        shell: bash
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
-
-    - name: Terraform Init
-      run: terraform -chdir=$TERRAFORM_PATH init
-
-    - name: Terraform Format
-      run: terraform -chdir=$TERRAFORM_PATH fmt -check
-
-    - name: Terraform Plan
-      run: terraform -chdir=$TERRAFORM_PATH plan -input=false -var "aws_region=${{ env.AWS_REGION }}"
-      
-    - name: Terraform Apply
-      run: terraform -chdir=$TERRAFORM_PATH apply -auto-approve -input=false -var "aws_region=${{ env.AWS_REGION }}"
