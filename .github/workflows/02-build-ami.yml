@@ -1,0 +1,36 @@
+name: Build AMIs with Packer
+
+on:
+  workflow_dispatch:
+  
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Build AMI with Packer'
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Packer Init
+      run: packer init ./packer/
+
+    - name: Packer Init
+      run: packer build ./packer/
