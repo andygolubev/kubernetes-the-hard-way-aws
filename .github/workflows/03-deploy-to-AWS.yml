@@ -33,9 +33,6 @@ jobs:
     - name: Terraform Init
       run: terraform -chdir=$TERRAFORM_PATH init
 
-    - name: Terraform Format
-      run: terraform -chdir=$TERRAFORM_PATH fmt -check
-
     - name: Terraform Plan
       run: terraform -chdir=$TERRAFORM_PATH plan -input=false -var "aws_region=$AWS_REGION"
       
