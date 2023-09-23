@@ -39,12 +39,12 @@ build {
   }
 
   provisioner "shell" {
-    inline = ["sudo mv -f /tmp/nginx.conf /etc/nginx/nginx.conf"]
+    inline = ["sudo mv -f /tmp/nginx.conf /etc/nginx/nginx.conf",
+    "sudo nginx -s reload"]
   }
 
   provisioner "shell" {
-    inline = ["cat /tmp/hosts | sudo tee -a /etc/hosts",
-      "sudo nginx -s reload"]
+    inline = ["cat /tmp/hosts | sudo tee -a /etc/hosts"]
   }
 
   post-processor "manifest" {
