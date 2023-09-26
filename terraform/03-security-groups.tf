@@ -30,7 +30,7 @@ resource "aws_security_group" "public" {
   }
 
   tags = {
-    Name = "sg-public"
+    Name = "sg public"
   }
 }
 
@@ -48,7 +48,7 @@ resource "aws_security_group" "private" {
   }
 
   tags = {
-    Name = "sg-private"
+    Name = "sg private"
   }
 }
 

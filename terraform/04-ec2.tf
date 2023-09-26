@@ -28,7 +28,7 @@ resource "aws_instance" "bastion" {
   subnet_id                   = aws_subnet.public-subnet-0.id
   ami                         = "ami-03f65b8614a860c29"
   instance_type               = "t2.micro"
-  security_groups             = [aws_security_group.public.name]
+  security_groups             = [ aws_security_group.public.name, ]
   associate_public_ip_address = true
 
   tags = {
