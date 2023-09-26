@@ -27,6 +27,7 @@ build {
 
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
+      "set +x",
       "sudo apt update",
       "sudo apt install -y dialog apt-utils",
       "sudo apt install -y nginx",
