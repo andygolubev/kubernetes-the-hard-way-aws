@@ -4,7 +4,7 @@ data "aws_ami" "k8s-control-plane-1-ami" {
 
   filter {
     name   = "name"
-    values = ["k8s-control-plane-1"]
+    values = ["k8s-control-plane-1*"]
   }
 }
 
