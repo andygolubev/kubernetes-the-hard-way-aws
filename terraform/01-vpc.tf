@@ -16,8 +16,3 @@ resource "aws_internet_gateway" "kubernetes-igw" {
     Name = "Kubernetes-IGW"
   }
 }
-
-resource "aws_internet_gateway_attachment" "this" {
-  internet_gateway_id = aws_internet_gateway.kubernetes-igw.id
-  vpc_id              = aws_vpc.kubernetes-vpc.id
-}
