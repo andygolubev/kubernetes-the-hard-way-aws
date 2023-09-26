@@ -27,8 +27,8 @@ build {
 
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
-      "sudo apt update",
-      "sudo apt install -y nginx libnginx-mod-stream",
+      "sudo apt update && sleep 10",
+      "sudo apt install -y nginx",
       "sudo systemctl enable nginx"]
   }
 
