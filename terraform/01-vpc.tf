@@ -19,10 +19,10 @@ resource "aws_vpc" "kubernetes-vpc" {
 resource "aws_subnet" "private-subnet-0" {
   vpc_id            = aws_vpc.kubernetes-vpc.id
   cidr_block        = "172.20.0.0/20"
-  availability_zone = "us-west-2a"
+  availability_zone = var.availability_zone_names[0]
 
   tags = {
-    Name = "private-subnet-0 west-2a"
+    Name = "private-subnet-0-${var.availability_zone_names[0]}"
   }
 }
 
@@ -64,10 +64,10 @@ resource "aws_network_interface" "private-subnet-0-eip-172-20-0-7" {
 resource "aws_subnet" "private-subnet-1" {
   vpc_id            = aws_vpc.kubernetes-vpc.id
   cidr_block        = "172.20.16.0/20"
-  availability_zone = "us-west-2b"
+  availability_zone = var.availability_zone_names[1]
 
   tags = {
-    Name = "private-subnet-1 west-2b"
+    Name = "private-subnet-1-${var.availability_zone_names[1]}"
   }
 }
 
@@ -100,10 +100,10 @@ resource "aws_network_interface" "private-subnet-1-eip-172-20-16-6" {
 resource "aws_subnet" "private-subnet-2" {
   vpc_id            = aws_vpc.kubernetes-vpc.id
   cidr_block        = "172.20.32.0/20"
-  availability_zone = "us-west-2c"
+  availability_zone = var.availability_zone_names[2]
 
   tags = {
-    Name = "private-subnet-2 west-2c"
+    Name = "private-subnet-2-${var.availability_zone_names[2]}"
   }
 }
 
@@ -135,10 +135,10 @@ resource "aws_network_interface" "private-subnet-2-eip-172-20-32-6" {
 resource "aws_subnet" "public-subnet-0" {
   vpc_id            = aws_vpc.kubernetes-vpc.id
   cidr_block        = "172.20.48.0/20"
-  availability_zone = "us-west-2a"
+  availability_zone = var.availability_zone_names[0]
 
   tags = {
-    Name = "public-subnet-0 west-2a"
+    Name = "public-subnet-0-${var.availability_zone_names[0]}"
   }
 }
 

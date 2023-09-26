@@ -5,7 +5,7 @@ variable "aws_region" {
 
 variable "availability_zone_names" {
   type    = list(string)
-  default = ["us-west-2a", "us-west-2b","us-west-2c"]
+  default = ["us-west-2a", "us-west-2b", "us-west-2c"]
 
   validation {
     condition     = length(var.availability_zone_names) == 3
