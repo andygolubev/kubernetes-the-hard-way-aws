@@ -1,5 +1,4 @@
 data "aws_ami" "k8s-control-plane-1-ami" {
-  executable_users = ["self"]
   most_recent      = true
   owners           = ["self"]
 
