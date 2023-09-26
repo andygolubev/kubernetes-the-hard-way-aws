@@ -1,6 +1,8 @@
 name: 03 Deploying EC2 on AWS
 
 on:
+  push:
+    branches: [ "main" ]  
   workflow_dispatch:
   
 env:

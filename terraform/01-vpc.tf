@@ -47,7 +47,7 @@ resource "aws_subnet" "private-subnet-0" {
 }
 
 resource "aws_network_interface" "private-subnet-0-eip-172-20-0-4" {
-  subnet_id   = aws_subnet.private-subnet-0
+  subnet_id   = aws_subnet.private-subnet-0.id
   private_ips = ["172.20.0.4"]
 
   tags = {
