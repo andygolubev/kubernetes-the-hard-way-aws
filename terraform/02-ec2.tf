@@ -1,13 +1,12 @@
 data "aws_ami" "k8s-control-plane-1-ami" {
   executable_users = ["self"]
   most_recent      = true
-  name_regex       = "*k8s-control-plane-1*"
   owners           = ["self"]
 
-#   filter {
-#     name   = "name"
-#     values = ["k8s-control-plane-1*"]
-#   }
+  filter {
+    name   = "name"
+    values = ["k8s-control-plane-1"]
+  }
 }
 
 resource "aws_instance" "foo" {
