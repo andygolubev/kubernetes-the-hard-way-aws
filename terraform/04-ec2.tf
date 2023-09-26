@@ -1,15 +1,15 @@
-data "aws_ami" "k8s-control-plane-1-ami" {
+data "aws_ami" "k8s-control-plane-0-ami" {
   most_recent = true
   owners      = ["self"]
 
   filter {
     name   = "name"
-    values = ["k8s-control-plane-1*"]
+    values = ["k8s-control-plane-0*"]
   }
 }
 
 resource "aws_instance" "test" {
-  ami           = data.aws_ami.k8s-control-plane-1-ami.id
+  ami           = data.aws_ami.k8s-control-plane-0-ami.id
   instance_type = "t2.micro"
 
   network_interface {

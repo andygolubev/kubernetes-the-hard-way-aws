@@ -1,19 +1,19 @@
-source "amazon-ebs" "ubuntu-kubernetes-the-hard-way-control-plane-1" {
+source "amazon-ebs" "ubuntu-kubernetes-the-hard-way-control-plane-0" {
 
   profile       = "default"
   region        = var.region
   instance_type = var.instance_type
   source_ami    = data.amazon-ami.ubuntu.id
 
-  ami_name = "k8s-control-plane-1-{{timestamp}}"
+  ami_name = "k8s-control-plane-0-{{timestamp}}"
 
   ssh_username = "ubuntu"
 }
 
 build {
-  name = "k8s-control-plane-1"
+  name = "k8s-control-plane-0"
   sources = [
-    "source.amazon-ebs.ubuntu-kubernetes-the-hard-way-control-plane-1"
+    "source.amazon-ebs.ubuntu-kubernetes-the-hard-way-control-plane-0"
   ]
 
   provisioner "shell" {
@@ -159,11 +159,11 @@ build {
 
 
   # provisioner "puppet-masterless" {
-  #   manifest_file = "../puppet/configure-control-plane-1.pp"
+  #   manifest_file = "../puppet/configure-control-plane-0.pp"
   # }
 
   post-processor "manifest" {
-    output     = "manifest-control-plane-1.json"
+    output     = "manifest-control-plane-0.json"
     strip_path = true
   }
 
