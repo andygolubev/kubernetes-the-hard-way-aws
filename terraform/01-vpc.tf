@@ -27,7 +27,7 @@
 
 
 
-resource "aws_vpc" "this" {
+resource "aws_vpc" "kubernetes-vpc" {
   cidr_block = "172.20.0.0/16"
 
   tags = {
@@ -37,7 +37,7 @@ resource "aws_vpc" "this" {
 }
 
 resource "aws_subnet" "private-subnet-0" {
-  vpc_id            = aws_vpc.my_vpc.id
+  vpc_id            = aws_vpc.kubernetes-vpc.id
   cidr_block        = "172.20.0.0/20"
   availability_zone = "us-west-2a"
 
