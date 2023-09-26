@@ -9,8 +9,8 @@ data "aws_ami" "k8s-control-plane-1-ami" {
 }
 
 resource "aws_instance" "test" {
-  ami             = data.aws_ami.k8s-control-plane-1-ami.id
-  instance_type   = "t2.micro"
+  ami           = data.aws_ami.k8s-control-plane-1-ami.id
+  instance_type = "t2.micro"
 
   network_interface {
     network_interface_id = aws_network_interface.private-subnet-0-eip-172-20-0-4.id
