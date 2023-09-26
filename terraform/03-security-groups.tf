@@ -1,5 +1,5 @@
 resource "aws_security_group" "public" {
-  name        = "sg-public"
+  name        = "public-sg"
   description = "Allow inbound traffic"
   vpc_id      = aws_vpc.kubernetes-vpc.id
 
@@ -28,10 +28,14 @@ resource "aws_security_group" "public" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
+
+  tags = {
+    Name = "sg-public"
+  }
 }
 
 resource "aws_security_group" "private" {
-  name        = "sg-private"
+  name        = "private-sg"
   description = "Allow traffic from public sg"
   vpc_id      = aws_vpc.kubernetes-vpc.id
 
