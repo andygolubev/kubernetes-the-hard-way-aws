@@ -17,6 +17,17 @@ build {
   ]
 
   provisioner "shell" {
+    inline = ["echo WAIT FOR CLOUD_INIT FINISH",
+      "cloud-init status --wait"]
+  }
+
+  provisioner "shell" {
+    inline = [
+      "echo set debconf to Noninteractive", 
+      "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections" ]
+  }
+
+  provisioner "shell" {
     inline = ["echo current user $(whoami)",
       "sudo mkdir -p /etc/kubernetes/certs",
       "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",

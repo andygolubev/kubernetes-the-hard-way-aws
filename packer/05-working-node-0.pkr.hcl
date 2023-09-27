@@ -17,6 +17,17 @@ build {
   ]
 
   provisioner "shell" {
+    inline = ["echo WAIT FOR CLOUD_INIT FINISH",
+      "cloud-init status --wait"]
+  }
+
+  provisioner "shell" {
+    inline = [
+      "echo set debconf to Noninteractive", 
+      "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections" ]
+  }
+
+  provisioner "shell" {
     inline = ["echo current user $(whoami)",
       "sudo mkdir -p /etc/kubernetes/certs",
       "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
@@ -32,7 +43,7 @@ build {
     destination = "/etc/kubernetes/certs/"
   }
 
-  provisioner "file" {
+  provisioner "file" { //replace
     sources = ["/tmp/kthw-certs/working-node-0.kubeconfig",
     "/tmp/kthw-certs/kube-proxy.kubeconfig"]
     destination = "/etc/kubernetes/config/"
@@ -42,29 +53,10 @@ build {
     inline = ["ls -la /etc/kubernetes/certs /etc/kubernetes/config"]
   }
 
-  # provisioner "shell" {
-  #   inline = ["sudo apt -y update",
-  #     "wget http://apt.puppet.com/puppet8-release-jammy.deb",
-  #     "sudo dpkg -i puppet8-release-jammy.deb",
-  #     "sudo apt -y update",
-  #     "sudo apt -y install puppet-agent",
-  #     "echo 'Defaults secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/opt/puppetlabs/bin' | sudo tee -a /etc/sudoers.d/extra",
-  #     "bash"
-  #   ]
-  # }
-
-  # provisioner "puppet-masterless" {
-  #   manifest_file = "../puppet/configure-working-node-0.pp"
-  # }
-
-  post-processor "manifest" {
+  post-processor "manifest" { //replace
     output     = "manifest-working-node-0.json"
     strip_path = true
   }
-
-  // jq -r '.builds[0].artifact_id|split(":")[1]' ./manifest.json 
-
-
 
 }
 
