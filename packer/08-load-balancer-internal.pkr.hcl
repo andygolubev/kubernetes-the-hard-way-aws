@@ -29,15 +29,18 @@ build {
     inline = ["echo WAIT FOR CLOUD_INIT FINISH",
       "cloud-init status --wait"]
   }
+
+  provisioner "shell" {
+    inline = [
+      "echo set debconf to Noninteractive", 
+      "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections" ]
+  }
   
 
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
-      "echo make update",
       "sudo apt update",
-      "echo apt install nginx",
-      "DEBIAN_FRONTEND=noninteractive sudo apt install -y nginx",
-      "echo run nginx",
+      "sudo apt install -y nginx",
       "sudo systemctl enable nginx"]
   }
 
