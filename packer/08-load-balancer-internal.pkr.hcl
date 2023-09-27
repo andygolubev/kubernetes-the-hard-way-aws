@@ -26,6 +26,12 @@ build {
   # }
 
   provisioner "shell" {
+    inline = ["echo WAIT FOR CLOUD_INIT FINISH",
+      "cloud-init status --wait"]
+  }
+  
+
+  provisioner "shell" {
     inline = ["echo current user $(whoami)",
       "echo make update",
       "sudo apt update",
