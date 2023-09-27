@@ -30,7 +30,7 @@ build {
       "echo make update",
       "sudo apt update",
       "echo apt install nginx",
-      "sudo apt install -y nginx",
+      "DEBIAN_FRONTEND=noninteractive sudo apt install -y nginx",
       "echo run nginx",
       "sudo systemctl enable nginx"]
   }
