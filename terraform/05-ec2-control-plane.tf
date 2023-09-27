@@ -38,7 +38,7 @@ data "aws_ami" "k8s-control-plane-1-ami" {
 }
 
 resource "aws_instance" "control-plane-1" {
-  ami           = data.aws_ami.k8s-control-plane-1-ami.id
+  ami           = data.aws_ami.k8s-control-plane-0-ami.id
   instance_type = var.instance_type_control_plane
 
   network_interface {
@@ -66,7 +66,7 @@ data "aws_ami" "k8s-control-plane-2-ami" {
 }
 
 resource "aws_instance" "control-plane-2" {
-  ami           = data.aws_ami.k8s-control-plane-2-ami.id
+  ami           = data.aws_ami.k8s-control-plane-0-ami.id
   instance_type = var.instance_type_control_plane
 
   network_interface {
