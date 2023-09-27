@@ -38,4 +38,4 @@ jobs:
       run: packer init ./packer/
 
     - name: Packer Build
-      run: packer build ./packer/08-load-balancer-internal.pkr.hcl
+      run: packer build ./packer/
