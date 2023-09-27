@@ -151,11 +151,6 @@ build {
       "sudo systemctl status nginx"]
   }
 
-  provisioner "shell" {
-    inline = [
-      "echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJser924mq9JcdE6ef1IpvSXyAUUzKuDCL+FYZhDaPl8 k8s_key' >> ~/.ssh/authorized_keys"]
-  }
-
   post-processor "manifest" {
     output     = "manifest-control-plane-1.json"
     strip_path = true
