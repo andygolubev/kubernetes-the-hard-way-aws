@@ -12,3 +12,23 @@ variable "availability_zone_names" {
     error_message = "You must specify 3 availability zones"
   }
 }
+
+variable "instance_type_control_plane" {
+  type    = string
+  default = "t2.micro"
+}
+
+variable "instance_type_working_node" {
+  type    = string
+  default = "t2.micro"
+}
+
+variable "instance_type_load_balancer" {
+  type    = string
+  default = "t2.micro"
+}
+
+variable "instance_type_bastion" {
+  type    = string
+  default = "t2.micro"
+}

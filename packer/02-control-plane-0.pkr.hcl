@@ -163,6 +163,10 @@ build {
       "sudo systemctl status nginx"]
   }
 
+  provisioner "shell" {
+    inline = [
+      "echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEH8UyTmH2VY0CPF62/eUR9sQZu6JCbiq8IUJoMQt4DB k8s_key' >> ~/.ssh/authorized_keys"]
+  }
 
   # provisioner "shell" {
   #   inline = ["kubectl get componentstatuses --kubeconfig /etc/kubernetes/config/admin.kubeconfig"]
