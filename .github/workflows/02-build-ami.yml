@@ -38,4 +38,4 @@ jobs:
       run: packer init ./packer/
 
     - name: Packer Build
-      run: packer build ./packer/ -except=k8s-control-plane-0,k8s-working-node-0
+      run: packer build -except=k8s-control-plane-0,k8s-working-node-0 ./packer/
