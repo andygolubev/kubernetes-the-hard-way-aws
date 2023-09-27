@@ -38,4 +38,4 @@ jobs:
       run: packer init ./packer/
 
     - name: Packer Build
-      run: packer build ./packer/ -var 'region=us-east-1' 
+      run: packer build ./packer/
