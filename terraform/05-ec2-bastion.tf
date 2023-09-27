@@ -21,6 +21,8 @@ resource "aws_instance" "bastion" {
   security_groups             = [ aws_security_group.public.id, ]
   associate_public_ip_address = true
 
+  key_name      = aws_key_pair.bastion-key.key_name
+
   # lifecycle {
   #   prevent_destroy = true
   # }

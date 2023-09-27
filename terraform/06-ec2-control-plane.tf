@@ -40,7 +40,7 @@ data "aws_ami" "k8s-control-plane-1-ami" {
 }
 
 resource "aws_instance" "control-plane-1" {
-  ami           = data.aws_ami.k8s-control-plane-0-ami.id
+  ami           = data.aws_ami.k8s-control-plane-1-ami.id
   instance_type = var.instance_type_control_plane
 
   key_name      = aws_key_pair.bastion-key.key_name
