@@ -32,7 +32,8 @@ build {
       "sudo mkdir -p /etc/kubernetes/certs",
       "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
       "sudo mkdir -p /etc/kubernetes/config",
-    "sudo chown ubuntu:ubuntu /etc/kubernetes/config"]
+      "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
+      "sudo mkdir -p /opt/cni/bin/"]
   }
 
 
@@ -52,6 +53,51 @@ build {
   provisioner "shell" {
     inline = ["ls -la /etc/kubernetes/certs /etc/kubernetes/config"]
   }
+
+  provisioner "shell" {
+    inline = ["echo current user $(whoami)",
+      "sudo apt update",
+      "sudo apt install -y socat conntrack ipset"]
+  }
+
+  provisioner "shell" {
+    inline = [
+      "mkdir -p /tmp/k8s-server-components",
+      "cd /tmp/k8s-server-components",
+      "wget --quiet https://cdn.dl.k8s.io/release/v1.28.2/kubernetes-server-linux-amd64.tar.gz",
+      "tar -xvf kubernetes-server-linux-amd64.tar.gz",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-apiserver /usr/local/bin/",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-controller-manager /usr/local/bin/",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-scheduler /usr/local/bin/",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kubectl /usr/local/bin/",
+      "rm -rf /tmp/k8s-server-components"
+    ]
+  }  
+
+  provisioner "shell" {
+    inline = [
+      "mkdir -p /tmp/cni-plugins/",
+      "cd /tmp/cni-plugins",
+      "wget --quiet https://github.com/containernetworking/plugins/releases/download/v1.3.0/cni-plugins-linux-amd64-v1.3.0.tgz",
+      "sudo tar -xvf cni-plugins-linux-amd64-v1.3.0.tgz -C /opt/cni/bin/"
+      "rm -rf /tmp/cni-plugins"
+    ]
+  }  
+
+  provisioner "shell" {
+    inline = [
+      "mkdir -p /tmp/runc-files/",
+      "cd /tmp/runc-files/",
+      "wget --quiet https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc",
+      "wget --quiet https://github.com/opencontainers/runc/releases/download/v1.1.9/runc.amd64",
+      "mv runc.amd64 runc"
+      "chmod +x /tmp/runc-files/runsc /tmp/runc-files/runc",
+      "sudo mv /tmp/runc-files/runsc /tmp/runc-files/runc /usr/local/bin/",
+      "rm -rf /tmp/runc-files/"
+    ]
+  }  
+
+  
 
   post-processor "manifest" { //replace
     output     = "manifest-working-node-0.json"
