@@ -60,21 +60,20 @@ build {
       "sudo apt install -y socat conntrack ipset"]
   }
 
-  provisioner "shell" {
+  provisioner "shell" { // kubectl kube-proxy kubelet
     inline = [
       "mkdir -p /tmp/k8s-server-components",
       "cd /tmp/k8s-server-components",
       "wget --quiet https://cdn.dl.k8s.io/release/v1.28.2/kubernetes-server-linux-amd64.tar.gz",
       "tar -xvf kubernetes-server-linux-amd64.tar.gz",
-      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-apiserver /usr/local/bin/",
-      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-controller-manager /usr/local/bin/",
-      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-scheduler /usr/local/bin/",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-proxy /usr/local/bin/",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kubelet /usr/local/bin/",
       "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kubectl /usr/local/bin/",
       "rm -rf /tmp/k8s-server-components"
     ]
   }  
 
-  provisioner "shell" {
+  provisioner "shell" { // cni-plugins
     inline = [
       "mkdir -p /tmp/cni-plugins/",
       "cd /tmp/cni-plugins",
@@ -84,7 +83,7 @@ build {
     ]
   }  
 
-  provisioner "shell" {
+  provisioner "shell" { //runc runsc
     inline = [
       "mkdir -p /tmp/runc-files/",
       "cd /tmp/runc-files/",
@@ -97,7 +96,28 @@ build {
     ]
   }  
 
+  provisioner "shell" { // crictl
+    inline = [
+      "mkdir -p /tmp/crictl-files/",
+      "cd /tmp/crictl-files/",
+      "wget --quiet https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.28.0/crictl-v1.28.0-linux-amd64.tar.gz",
+      "sudo tar -xvf crictl-v1.28.0-linux-amd64.tar.gz -C /usr/local/bin/",
+      "rm -rf /tmp/crictl-files/"
+    ]
+  } 
+
+  provisioner "shell" { // containerd
+    inline = [
+      "mkdir -p /tmp/containerd-files/",
+      "cd /tmp/containerd-files/",
+      "wget --quiet https://github.com/containerd/containerd/releases/download/v1.6.24/containerd-1.6.24-linux-amd64.tar.gz",
+      "sudo tar -xvf containerd-1.6.24-linux-amd64.tar.gz -C /",
+      "rm -rf /tmp/containerd-files/"
+    ]
+  } 
+
   
+
 
   post-processor "manifest" { //replace
     output     = "manifest-working-node-0.json"
