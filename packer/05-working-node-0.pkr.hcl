@@ -79,7 +79,7 @@ build {
       "mkdir -p /tmp/cni-plugins/",
       "cd /tmp/cni-plugins",
       "wget --quiet https://github.com/containernetworking/plugins/releases/download/v1.3.0/cni-plugins-linux-amd64-v1.3.0.tgz",
-      "sudo tar -xvf cni-plugins-linux-amd64-v1.3.0.tgz -C /opt/cni/bin/"
+      "sudo tar -xvf cni-plugins-linux-amd64-v1.3.0.tgz -C /opt/cni/bin/",
       "rm -rf /tmp/cni-plugins"
     ]
   }  
@@ -90,7 +90,7 @@ build {
       "cd /tmp/runc-files/",
       "wget --quiet https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc",
       "wget --quiet https://github.com/opencontainers/runc/releases/download/v1.1.9/runc.amd64",
-      "mv runc.amd64 runc"
+      "mv runc.amd64 runc",
       "chmod +x /tmp/runc-files/runsc /tmp/runc-files/runc",
       "sudo mv /tmp/runc-files/runsc /tmp/runc-files/runc /usr/local/bin/",
       "rm -rf /tmp/runc-files/"
