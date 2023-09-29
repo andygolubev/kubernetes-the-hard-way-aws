@@ -37,6 +37,7 @@ build {
       "sudo mkdir -p /usr/local/bin/",
       "sudo mkdir -p /etc/cni/net.d",
       "sudo mkdir -p /var/lib/kubelet",
+      "sudo chown ubuntu:ubuntu /var/lib/kubelet",
       "sudo mkdir -p /var/lib/kube-proxy",
       "sudo mkdir -p /var/lib/kubernetes",
       "sudo mkdir -p /var/run/kubernetes",
@@ -59,14 +60,20 @@ build {
     destination = "/etc/kubernetes/config/"
   }
 
-  provisioner "file" { //replace
+  provisioner "file" { 
     sources = ["/tmp/kthw-certs/config.toml"]
     destination = "/etc/containerd/"
   }
 
   provisioner "file" {
-    sources     = ["/tmp/kthw-certs/containerd.service"]
-    destination = "/tmp/services/containerd.service"
+    sources = ["/tmp/kthw-certs/kubelet-config.yaml"]
+    destination = "/var/lib/kubelet/kubelet-config.yaml"
+  }
+
+  provisioner "file" {
+    sources     = ["/tmp/kthw-certs/containerd.service",
+      "/tmp/kthw-certs/kubelet.service"]
+    destination = "/tmp/services/"
   }
 
   provisioner "shell" {
