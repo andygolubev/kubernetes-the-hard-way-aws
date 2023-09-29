@@ -112,7 +112,7 @@ build {
       "mkdir -p /tmp/containerd-files/",
       "cd /tmp/containerd-files/",
       "wget --quiet https://github.com/containerd/containerd/releases/download/v1.6.24/containerd-1.6.24-linux-amd64.tar.gz",
-      "sudo tar -xvf containerd-1.6.24-linux-amd64.tar.gz -C /",
+      # "sudo tar -xvf containerd-1.6.24-linux-amd64.tar.gz -C /",
       "sudo rm -rf /tmp/containerd-files/",
       "sudo chmod 1777 /tmp/"
     ]
