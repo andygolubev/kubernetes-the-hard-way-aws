@@ -70,7 +70,7 @@ build {
       "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kube-proxy /usr/local/bin/",
       "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kubelet /usr/local/bin/",
       "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kubectl /usr/local/bin/",
-      "rm -rf /tmp/k8s-server-components"
+      "sudo rm -rf /tmp/k8s-server-components"
     ]
   }  
 
@@ -80,7 +80,7 @@ build {
       "cd /tmp/cni-plugins",
       "wget --quiet https://github.com/containernetworking/plugins/releases/download/v1.3.0/cni-plugins-linux-amd64-v1.3.0.tgz",
       "sudo tar -xvf cni-plugins-linux-amd64-v1.3.0.tgz -C /opt/cni/bin/",
-      "rm -rf /tmp/cni-plugins"
+      "sudo rm -rf /tmp/cni-plugins"
     ]
   }  
 
@@ -93,7 +93,7 @@ build {
       "mv runc.amd64 runc",
       "chmod +x /tmp/runc-files/runsc /tmp/runc-files/runc",
       "sudo mv /tmp/runc-files/runsc /tmp/runc-files/runc /usr/local/bin/",
-      "rm -rf /tmp/runc-files/"
+      "sudo rm -rf /tmp/runc-files/"
     ]
   }  
 
@@ -103,7 +103,7 @@ build {
       "cd /tmp/crictl-files/",
       "wget --quiet https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.28.0/crictl-v1.28.0-linux-amd64.tar.gz",
       "sudo tar -xvf crictl-v1.28.0-linux-amd64.tar.gz -C /usr/local/bin/",
-      "rm -rf /tmp/crictl-files/"
+      "sudo rm -rf /tmp/crictl-files/"
     ]
   } 
 
@@ -113,11 +113,9 @@ build {
       "cd /tmp/containerd-files/",
       "wget --quiet https://github.com/containerd/containerd/releases/download/v1.6.24/containerd-1.6.24-linux-amd64.tar.gz",
       "sudo tar -xvf containerd-1.6.24-linux-amd64.tar.gz -C /",
-      "rm -rf /tmp/containerd-files/"
+      "sudo rm -rf /tmp/containerd-files/"
     ]
   } 
-
-  
 
 
   post-processor "manifest" { //replace
