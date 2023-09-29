@@ -33,7 +33,8 @@ build {
       "sudo chown ubuntu:ubuntu /etc/kubernetes/certs",
       "sudo mkdir -p /etc/kubernetes/config",
       "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
-      "sudo mkdir -p /opt/cni/bin/"]
+      "sudo mkdir -p /opt/cni/bin/",
+      "sudo mkdir -p /usr/local/bin/"]
   }
 
 
