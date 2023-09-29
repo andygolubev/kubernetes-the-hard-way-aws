@@ -34,7 +34,9 @@ build {
       "sudo mkdir -p /etc/kubernetes/config",
       "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
       "sudo mkdir -p /opt/cni/bin/",
-      "sudo mkdir -p /usr/local/bin/"]
+      "sudo mkdir -p /usr/local/bin/",
+      "sudo mkdir -p /etc/containerd/"
+      "sudo chown ubuntu:ubuntu /etc/containerd/"]
   }
 
 
@@ -113,7 +115,7 @@ build {
       "cd /tmp/containerd-files/",
       "wget --quiet https://github.com/containerd/containerd/releases/download/v1.6.24/containerd-1.6.24-linux-amd64.tar.gz",
       "tar -xvf containerd-1.6.24-linux-amd64.tar.gz",
-      "sudo mv /tmp/containerd-files/bin/* /bin/"
+      "sudo mv /tmp/containerd-files/bin/* /bin/",
       "sudo rm -rf /tmp/containerd-files/"
     ]
   } 
