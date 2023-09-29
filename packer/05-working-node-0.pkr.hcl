@@ -92,6 +92,7 @@ build {
     inline = [
       "sudo cp /etc/kubernetes/certs/working-node-0-key.pem /var/lib/kubelet/",
       "sudo cp /etc/kubernetes/certs/working-node-0.pem /var/lib/kubelet/",
+      "sudo cp /etc/kubernetes/certs/ca.pem /var/lib/kubernetes/"
       "sudo cp /etc/kubernetes/config/working-node-0.kubeconfig /var/lib/kubelet/kubeconfig",
       "sudo cp /etc/kubernetes/config/kube-proxy.kubeconfig /var/lib/kube-proxy/kubeconfig"
     ]
