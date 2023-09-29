@@ -35,8 +35,9 @@ build {
       "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
       "sudo mkdir -p /opt/cni/bin/",
       "sudo mkdir -p /usr/local/bin/",
-      "sudo mkdir -p /etc/containerd/"
-      "sudo chown ubuntu:ubuntu /etc/containerd/"]
+      "sudo mkdir -p /etc/containerd/",
+      "sudo chown ubuntu:ubuntu /etc/containerd/",
+      "mkdir -p /tmp/services"]
   }
 
 
@@ -52,6 +53,22 @@ build {
     "/tmp/kthw-certs/kube-proxy.kubeconfig"]
     destination = "/etc/kubernetes/config/"
   }
+
+  provisioner "file" { //replace
+    sources = ["/tmp/kthw-certs/config.toml"]
+    destination = "/etc/containerd/"
+  }
+
+  provisioner "file" {
+    sources     = ["/tmp/kthw-certs/containerd.service"]
+    destination = "/tmp/services/containerd.service"
+  }
+
+  provisioner "shell" {
+    inline = ["sudo mv /tmp/services/* /etc/systemd/system/"]
+  }
+
+  
 
   provisioner "shell" {
     inline = ["ls -la /etc/kubernetes/certs /etc/kubernetes/config"]
