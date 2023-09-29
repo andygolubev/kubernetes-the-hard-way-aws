@@ -39,6 +39,7 @@ build {
       "sudo mkdir -p /var/lib/kubelet",
       "sudo chown ubuntu:ubuntu /var/lib/kubelet",
       "sudo mkdir -p /var/lib/kube-proxy",
+      "sudo chown ubuntu:ubuntu /var/lib/kube-proxy",
       "sudo mkdir -p /var/lib/kubernetes",
       "sudo mkdir -p /var/run/kubernetes",
       "sudo mkdir -p /etc/containerd/",
@@ -71,8 +72,15 @@ build {
   }
 
   provisioner "file" {
+    sources = ["/tmp/kthw-certs/kube-proxy-config.yaml"]
+    destination = "/var/lib/kube-proxy/kube-proxy-config.yaml"
+  }
+
+
+  provisioner "file" {
     sources     = ["/tmp/kthw-certs/containerd.service",
-      "/tmp/kthw-certs/kubelet.service"]
+      "/tmp/kthw-certs/kubelet.service",
+      "/tmp/kthw-certs/kube-proxy.service"]
     destination = "/tmp/services/"
   }
 
@@ -84,7 +92,8 @@ build {
     inline = [
       "sudo cp /etc/kubernetes/certs/working-node-0-key.pem /var/lib/kubelet/",
       "sudo cp /etc/kubernetes/certs/working-node-0.pem /var/lib/kubelet/",
-      "sudo cp /etc/kubernetes/config/working-node-0.kubeconfig /var/lib/kubelet/kubeconfig"
+      "sudo cp /etc/kubernetes/config/working-node-0.kubeconfig /var/lib/kubelet/kubeconfig",
+      "sudo cp /etc/kubernetes/config/kube-proxy.kubeconfig /var/lib/kube-proxy/kubeconfig"
     ]
   }
 
@@ -156,6 +165,14 @@ build {
     ]
   } 
 
+  provisioner "shell" { 
+    inline = [
+      "sudo systemctl daemon-reload",
+      "sudo systemctl enable containerd kubelet kube-proxy",
+      "sudo systemctl start containerd kubelet kube-proxy",
+      "sudo systemctl status containerd kubelet kube-proxy"
+    ]
+  } 
 
   post-processor "manifest" { //replace
     output     = "manifest-working-node-0.json"
