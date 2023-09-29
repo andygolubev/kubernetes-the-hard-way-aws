@@ -38,4 +38,4 @@ jobs:
       run: packer init ./packer/
 
     - name: Packer Build
-      run: packer build -debug ./packer/
+      run: packer build -on-error=ask -debug ./packer/
