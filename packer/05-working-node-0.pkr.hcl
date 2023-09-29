@@ -35,6 +35,11 @@ build {
       "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
       "sudo mkdir -p /opt/cni/bin/",
       "sudo mkdir -p /usr/local/bin/",
+      "sudo mkdir -p /etc/cni/net.d",
+      "sudo mkdir -p /var/lib/kubelet",
+      "sudo mkdir -p /var/lib/kube-proxy",
+      "sudo mkdir -p /var/lib/kubernetes",
+      "sudo mkdir -p /var/run/kubernetes",
       "sudo mkdir -p /etc/containerd/",
       "sudo chown ubuntu:ubuntu /etc/containerd/",
       "mkdir -p /tmp/services"]
@@ -68,7 +73,14 @@ build {
     inline = ["sudo mv /tmp/services/* /etc/systemd/system/"]
   }
 
-  
+  provisioner "shell" { // replace
+    inline = [
+      "sudo cp /etc/kubernetes/certs/working-node-0-key.pem /var/lib/kubelet/",
+      "sudo cp /etc/kubernetes/certs/working-node-0.pem /var/lib/kubelet/",
+      "sudo cp /etc/kubernetes/config/working-node-0.kubeconfig /var/lib/kubelet/kubeconfig"
+    ]
+  }
+
 
   provisioner "shell" {
     inline = ["ls -la /etc/kubernetes/certs /etc/kubernetes/config"]
