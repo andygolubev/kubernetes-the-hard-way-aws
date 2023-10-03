@@ -32,8 +32,10 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Prepare certs and config files
-      run: export PATH=/tmp/kthw-certs:$PATH; for i in $(ls ./scripts-for-certs-and-configs/); do bash ./scripts-for-certs-and-configs/$i; done
+    - uses: actions/download-artifact@v2
+      with:
+        name: kthw-certs
+        path: /tmp/kthw-certs/
 
     - name: Replace Region in Provider section of Terraform  
       run: sed -i 's/us-east-1/${{ env.AWS_REGION }}/g' $TERRAFORM_PATH/00-provider.tf
