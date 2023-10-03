@@ -1,12 +1,12 @@
 ## k8s-working-node-0
 
-data "aws_ami" "k8s-k8s-working-node-0-ami" {
+data "aws_ami" "k8s-working-node-0-ami" {
   most_recent = true
   owners      = ["self"]
 
   filter {
     name   = "name"
-    values = ["k8s-k8s-working-node-0*"]
+    values = ["k8s-working-node-0*"]
   }
 }
 
