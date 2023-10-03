@@ -46,6 +46,7 @@ jobs:
       run: packer build ./packer/
 
   terraform:
+    needs: packer
     name: 'Deploy EC2 on AWS'
     runs-on: ubuntu-latest
 
