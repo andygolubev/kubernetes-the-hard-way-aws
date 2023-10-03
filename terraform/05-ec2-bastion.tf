@@ -1,22 +1,32 @@
-data "aws_ami" "bastion" {
+# data "aws_ami" "bastion" {
+#   most_recent = true
+#   owners      = ["099720109477"]
+
+#     filter {
+#         name   = "name"
+#         values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+#     }
+
+#     filter {
+#         name = "virtualization-type"
+#         values = ["hvm"]
+#     }
+
+# }
+
+data "aws_ami" "k8s-bastion-host-ami" {
   most_recent = true
-  owners      = ["099720109477"]
+  owners      = ["self"]
 
-    filter {
-        name   = "name"
-        values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
-    }
-
-    filter {
-        name = "virtualization-type"
-        values = ["hvm"]
-    }
-
+  filter {
+    name   = "name"
+    values = ["k8s-bastion-host*"]
+  }
 }
 
 resource "aws_instance" "bastion" {
   subnet_id                   = aws_subnet.public-subnet-0.id
-  ami                         = data.aws_ami.bastion.id
+  ami                         = data.aws_ami.k8s-bastion-host-ami.id
   instance_type               = var.instance_type_bastion
   security_groups             = [ aws_security_group.public.id, ]
   associate_public_ip_address = true
