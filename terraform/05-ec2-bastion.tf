@@ -31,3 +31,43 @@ resource "aws_instance" "bastion" {
     Name = "Bastion Host"
   }
 }
+
+
+# resource "aws_instance" "my_ec2" 
+#   ami                    = "ami-0e742cca61fb65051"
+#   instance_type          = "t2.micro"
+#   key_name               = "tf_provisioner"
+#   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
+
+
+#   # Connect with AWS Resoeces
+#   connection {
+#     type        = "ssh"
+#     user        = "ec2-user"
+#     host        = self.public_ip
+#     private_key = file("./tf_provisioner.pem")
+#   }
+
+
+#   # Remote Provisioner for User Data
+#   provisioner "remote-exec" {
+#     inline = [
+#       "sudo yum install -y httpd.x86_64",
+#       "sudo systemctl start httpd.service",
+#       "sudo  systemctl enable httpd.service",
+#       "sudo chmod -R 777 /var/www/html",
+#       "sudo  echo “User Data Installed by Terraform $(hostname -f)” >> /var/www/html/index.html"
+#     ]
+#   }
+
+#  tags = {
+#     Name = "Remote_Provisioner"
+#   }
+# }
+
+
+
+
+
+
+
