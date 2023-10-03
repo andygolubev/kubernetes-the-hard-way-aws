@@ -27,6 +27,9 @@ build {
       "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections" ]
   }
   
+  provisioner "shell" {
+    inline = ["mkdir -p /home/ubuntu/manifest/" ]
+  }
 
   provisioner "file" {
     sources = ["/tmp/kthw-certs/hosts"]
@@ -38,6 +41,20 @@ build {
     "/tmp/kthw-certs/bastion-key.pub"]
     destination = "/home/ubuntu/.ssh/"
   }
+
+  provisioner "file" {
+    sources = ["/tmp/kthw-certs/bastion.kubeconfig"]
+    destination = "/home/ubuntu/.kube/config"
+  }
+
+  provisioner "file" {
+    sources = [
+        "/tmp/kthw-certs/clusterrole.yaml",
+        "/tmp/kthw-certs/clusterrolebinding.yaml"
+    ]
+    destination = "/home/ubuntu/manifest/"
+  }  
+  
 
   provisioner "shell" {
     inline = ["cat /tmp/hosts | sudo tee -a /etc/hosts"]

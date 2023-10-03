@@ -16,7 +16,7 @@
 
 cd /tmp/kthw-certs
 
-cat > ClusterRole.yaml << EOF
+cat > clusterrole.yaml << EOF
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
@@ -40,7 +40,7 @@ EOF
 
 # Bind the role to the kubernetes user:
 
-cat > ClusterRoleBinding.yaml << EOF
+cat > clusterrolebinding.yaml << EOF
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
