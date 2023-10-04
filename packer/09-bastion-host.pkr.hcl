@@ -28,7 +28,9 @@ build {
   }
   
   provisioner "shell" {
-    inline = ["mkdir -p /home/ubuntu/manifest/" ]
+    inline = [
+        "mkdir -p /home/ubuntu/manifest/",
+        "mkdir -p /home/ubuntu/.kube/" ]
   }
 
   provisioner "file" {
