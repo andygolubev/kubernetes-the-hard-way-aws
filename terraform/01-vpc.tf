@@ -16,3 +16,4 @@ resource "aws_internet_gateway" "kubernetes-igw" {
     Name = "Kubernetes-IGW"
   }
 }
+

@@ -20,7 +20,7 @@ variable "instance_type_control_plane" {
 
 variable "instance_type_working_node" {
   type    = string
-  default = "t2.micro"
+  default = "t2.small"
 }
 
 variable "instance_type_load_balancer" {
