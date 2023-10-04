@@ -34,31 +34,28 @@ resource "aws_instance" "bastion" {
   key_name      = aws_key_pair.bastion-key.key_name
 
 
-  # user_data   = <<-EOF
-  #           #!/bin/bash
-  #           kubectl apply -f /home/ubuntu/manifest/clusterrole.yaml
-  #           kubectl apply -f /home/ubuntu/manifest/clusterrolebinding.yaml
-  #           kubectl apply -f /home/ubuntu/manifest/weave-daemonset-k8s.yaml
-  #           EOF
+  user_data   = <<-EOF
+            #!/bin/bash
+            kubectl apply -f /home/ubuntu/manifest/clusterrole.yaml
+            kubectl apply -f /home/ubuntu/manifest/clusterrolebinding.yaml
+            kubectl apply -f /home/ubuntu/manifest/weave-daemonset-k8s.yaml
+            EOF
 
 
-  # Connect with AWS Resoeces
-  connection {
-    type        = "ssh"
-    user        = "ubuntu"
-    host        = self.public_ip
-    private_key = file("/tmp/kthw-certs/bastion-key")
-  }
+  # connection {
+  #   type        = "ssh"
+  #   user        = "ubuntu"
+  #   host        = self.public_ip
+  #   private_key = file("/tmp/kthw-certs/bastion-key")
+  # }
 
-
-  # Remote Provisioner for User Data
-  provisioner "remote-exec" {
-    inline = [
-      "kubectl apply -f /home/ubuntu/manifest/clusterrole.yaml",
-      "kubectl apply -f /home/ubuntu/manifest/clusterrolebinding.yaml",
-      "kubectl apply -f /home/ubuntu/manifest/weave-daemonset-k8s.yaml"
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "kubectl apply -f /home/ubuntu/manifest/clusterrole.yaml",
+  #     "kubectl apply -f /home/ubuntu/manifest/clusterrolebinding.yaml",
+  #     "kubectl apply -f /home/ubuntu/manifest/weave-daemonset-k8s.yaml"
+  #   ]
+  # }
 
   tags = {
     Name = "Bastion Host"
