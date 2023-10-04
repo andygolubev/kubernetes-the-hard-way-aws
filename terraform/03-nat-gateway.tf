@@ -4,7 +4,7 @@ resource "aws_eip" "eip-nat" {
 
 resource "aws_nat_gateway" "kubernetes-nat" {
   allocation_id = aws_eip.eip-nat.id
-  subnet_id     = aws_subnet.public-subnet-0
+  subnet_id     = aws_subnet.public-subnet-0.id
 
   tags = {
     Name = "Kubernetes-NAT"
