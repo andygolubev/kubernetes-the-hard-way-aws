@@ -60,6 +60,17 @@ build {
     inline = ["cat /tmp/hosts | sudo tee -a /etc/hosts"]
   }
 
+  provisioner "shell" {
+    inline = [
+      "mkdir -p /tmp/k8s-server-components",
+      "cd /tmp/k8s-server-components",
+      "wget --quiet https://cdn.dl.k8s.io/release/v1.28.2/kubernetes-server-linux-amd64.tar.gz",
+      "tar -xvf kubernetes-server-linux-amd64.tar.gz",
+      "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kubectl /usr/local/bin/",
+      "rm -rf /tmp/k8s-server-components"
+    ]
+  }
+
   post-processor "manifest" {
     output     = "manifest-bastion-host.json"
     strip_path = true
