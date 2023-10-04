@@ -175,6 +175,16 @@ build {
     ]
   } 
 
+  provisioner "shell" { 
+    inline = [
+      "sudo sysctl net.ipv4.conf.all.forwarding=1",
+      "echo 'net.ipv4.conf.all.forwarding=1' | sudo tee -a /etc/sysctl.conf",
+      "sudo mkdir /sys/fs/cgroup/systemd",
+      "echo 'cgroup /sys/fs/cgroup/systemd cgroup none,name=systemd 0 0' | sudo tee -a /etc/fstab"
+    ]
+  } 
+
+
   post-processor "manifest" { //replace
     output     = "manifest-working-node-0.json"
     strip_path = true

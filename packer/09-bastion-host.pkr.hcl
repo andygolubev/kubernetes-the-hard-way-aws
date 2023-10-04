@@ -52,7 +52,8 @@ build {
   provisioner "file" {
     sources = [
         "/tmp/kthw-certs/clusterrole.yaml",
-        "/tmp/kthw-certs/clusterrolebinding.yaml"
+        "/tmp/kthw-certs/clusterrolebinding.yaml",
+        "/tmp/kthw-certs/weave-daemonset-k8s.yaml"
     ]
     destination = "/home/ubuntu/manifest/"
   }  
