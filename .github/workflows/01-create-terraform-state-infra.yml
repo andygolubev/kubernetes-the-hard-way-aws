@@ -5,7 +5,7 @@ on:
 
 env:
   # prefixes must be the same as in the 00-provider.tf
-  AWS_BUCKET_NAME_PREFIX: "terraform-state-for-kubernetes-the-hard-way-packer2" 
+  AWS_BUCKET_NAME_PREFIX: "terraform-state-for-kubernetes-the-hard-way-packer" 
   AWS_DYNAMO_DB_TABLE_NAME_PREFIX: "terraform-state-for-terraform-state-for-kubernetes-the-hard-way-packer"
 
   AWS_REGION: ${{ vars.AWS_REGION }}

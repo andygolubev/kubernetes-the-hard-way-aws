@@ -103,9 +103,12 @@ build {
 
   provisioner "shell" {
     inline = [
+      "mkdir -p /tmp/etcd-components",
+      "cd /tmp/etcd-components",
       "wget --quiet --https-only --timestamping https://github.com/etcd-io/etcd/releases/download/v3.4.27/etcd-v3.4.27-linux-amd64.tar.gz",
       "tar -xvf etcd-v3.4.27-linux-amd64.tar.gz",
-      "sudo mv etcd-v3.4.27-linux-amd64/etcd* /usr/local/bin/"
+      "sudo mv etcd-v3.4.27-linux-amd64/etcd* /usr/local/bin/",
+      "rm -rf /tmp/etcd-components"
     ]
   }
 

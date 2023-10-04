@@ -5,8 +5,8 @@ terraform {
     # It will be replaced in the pipeline by the command: sed -i 's/us-east-1/$AWS_REGION/g' 00-provider.tf 
     #
 
-    bucket         = "terraform-state-for-kubernetes-the-hard-way-packer2-us-east-1"
-    key            = "terraform-state-for-kubernetes-the-hard-way-packer2-us-east-1/terraform.tfstate"
+    bucket         = "terraform-state-for-kubernetes-the-hard-way-packer-us-east-1"
+    key            = "terraform-state-for-kubernetes-the-hard-way-packer-us-east-1/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "terraform-state-for-terraform-state-for-kubernetes-the-hard-way-packer-us-east-1"
     encrypt        = true
