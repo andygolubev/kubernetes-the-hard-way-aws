@@ -184,7 +184,7 @@ build {
       "echo 'systemctl restart kubelet.service' | sudo tee -a /etc/init.d/mountcgroup.sh",
       "echo 'started' | sudo tee -a /home/ubuntu/mount.log",
       "sudo chmod +x /etc/init.d/mountcgroup.sh",
-      "sudo update-rc.d mountcgroup.sh defaults"
+      "sudo update-rc.d mountcgroup.sh defaults",
       "sudo systemctl stop apparmor",
       "sudo systemctl disable apparmor"
     ]
