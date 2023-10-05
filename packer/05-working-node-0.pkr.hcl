@@ -35,7 +35,6 @@ build {
       "sudo chown ubuntu:ubuntu /etc/kubernetes/config",
       "sudo mkdir -p /opt/cni/bin/",
       "sudo mkdir -p /usr/local/bin/",
-      "sudo mkdir -p /etc/cni/net.d",
       "sudo mkdir -p /var/lib/kubelet",
       "sudo chown ubuntu:ubuntu /var/lib/kubelet",
       "sudo mkdir -p /var/lib/kube-proxy",
@@ -179,11 +178,14 @@ build {
     inline = [
       "sudo sysctl net.ipv4.conf.all.forwarding=1",
       "echo 'net.ipv4.conf.all.forwarding=1' | sudo tee -a /etc/sysctl.conf",
-      "sudo mkdir /sys/fs/cgroup/systemd",
-      "echo 'cgroup /sys/fs/cgroup/systemd cgroup none,name=systemd 0 0' | sudo tee -a /etc/fstab"
+      "echo '#!/bin/sh' | sudo tee -a /etc/init.d/mountcgroup.sh",
+      "echo 'mkdir /sys/fs/cgroup/systemd' | sudo tee -a /etc/init.d/mountcgroup.sh",
+      "echo 'mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd' | sudo tee -a /etc/init.d/mountcgroup.sh",
+      "sudo chmod +x /etc/init.d/mountcgroup.sh",
+      "sudo systemctl stop apparmor",
+      "sudo systemctl disable apparmor"
     ]
   } 
-
 
   post-processor "manifest" { //replace
     output     = "manifest-working-node-0.json"
