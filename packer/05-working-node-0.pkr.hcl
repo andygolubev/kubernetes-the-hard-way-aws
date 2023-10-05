@@ -181,6 +181,7 @@ build {
       "echo '#!/bin/sh' | sudo tee -a /etc/init.d/mountcgroup.sh",
       "echo 'mkdir /sys/fs/cgroup/systemd' | sudo tee -a /etc/init.d/mountcgroup.sh",
       "echo 'mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd' | sudo tee -a /etc/init.d/mountcgroup.sh",
+      "echo 'systemctl restart kubelet.service' | sudo tee -a /etc/init.d/mountcgroup.sh",
       "sudo chmod +x /etc/init.d/mountcgroup.sh",
       "sudo systemctl stop apparmor",
       "sudo systemctl disable apparmor"
