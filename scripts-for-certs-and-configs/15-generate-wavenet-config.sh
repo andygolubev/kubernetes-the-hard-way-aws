@@ -31,7 +31,7 @@ items:
           - get
           - list
           - watch
-      r- apiGroups:
+      - apiGroups:
           - extensions
         resources:
           - networkpolicies
