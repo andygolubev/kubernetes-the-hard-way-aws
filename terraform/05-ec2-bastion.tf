@@ -39,6 +39,7 @@ resource "aws_instance" "bastion" {
             kubectl apply --kubeconfig /home/ubuntu/.kube/config -f /home/ubuntu/manifest/clusterrole.yaml
             kubectl apply --kubeconfig /home/ubuntu/.kube/config -f /home/ubuntu/manifest/clusterrolebinding.yaml
             kubectl apply --kubeconfig /home/ubuntu/.kube/config -f /home/ubuntu/manifest/weave-daemonset-k8s.yaml
+            kubectl apply --kubeconfig /home/ubuntu/.kube/config -f /home/ubuntu/manifest/coredns.yaml
             EOF
 
 

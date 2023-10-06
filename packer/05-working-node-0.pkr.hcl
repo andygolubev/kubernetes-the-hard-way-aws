@@ -65,8 +65,8 @@ build {
     destination = "/etc/containerd/"
   }
 
-  provisioner "file" {
-    sources = ["/tmp/kthw-certs/kubelet-config.yaml"]
+  provisioner "file" { //replace
+    sources = ["/tmp/kthw-certs/kubelet-config-0.yaml"]
     destination = "/var/lib/kubelet/kubelet-config.yaml"
   }
 
@@ -75,10 +75,13 @@ build {
     destination = "/var/lib/kube-proxy/kube-proxy-config.yaml"
   }
 
+  provisioner "file" { //replace
+    sources     = ["/tmp/kthw-certs/kubelet.service-0"]
+    destination = "/tmp/services/kubelet.service"
+  }
 
   provisioner "file" {
     sources     = ["/tmp/kthw-certs/containerd.service",
-      "/tmp/kthw-certs/kubelet.service",
       "/tmp/kthw-certs/kube-proxy.service"]
     destination = "/tmp/services/"
   }

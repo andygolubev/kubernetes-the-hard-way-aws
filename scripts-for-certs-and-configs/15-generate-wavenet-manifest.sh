@@ -1,5 +1,5 @@
 
-# This is modified confir from here: https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+# This is modified config from here: https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
 
 cd /tmp/kthw-certs
 
