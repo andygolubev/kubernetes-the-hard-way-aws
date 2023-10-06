@@ -47,6 +47,7 @@ ExecStart=/usr/local/bin/kubelet \\
   --kubeconfig=/var/lib/kubelet/kubeconfig \\
   --register-node=true \\
   --v=2 \\
+  --resolv-conf=/run/systemd/resolve/resolv.conf \\
   --hostname-override=${HOSTNAME}
 Restart=on-failure
 RestartSec=5
