@@ -21,6 +21,13 @@ resource "aws_instance" "k8s-working-node-0" {
     device_index         = 0
   }
 
+    user_data   = <<-EOF
+            #!/bin/bash
+            mkdir /sys/fs/cgroup/systemd
+            mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+            systemctl restart kubelet.service
+            EOF
+
   tags = {
     Name = "k8s-working-node-0"
   }
