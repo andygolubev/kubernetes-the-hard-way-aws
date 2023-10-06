@@ -66,7 +66,7 @@ build {
   }
 
   provisioner "file" { //replace
-    sources = ["/tmp/kthw-certs/kubelet-config-0.yaml"]
+    sources = ["/tmp/kthw-certs/kubelet-config.yaml-0"]
     destination = "/var/lib/kubelet/kubelet-config.yaml"
   }
 
