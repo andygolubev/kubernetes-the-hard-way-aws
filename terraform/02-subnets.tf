@@ -74,13 +74,13 @@ resource "aws_network_interface" "private-subnet-1-eip-172-20-16-5" {
   }
 }
 
-resource "aws_network_interface" "private-subnet-1-eip-172-20-16-6" {
+resource "aws_network_interface" "private-subnet-1-eip-172-20-16-7" {
   subnet_id       = aws_subnet.private-subnet-1.id
-  private_ips     = ["172.20.16.6"]
+  private_ips     = ["172.20.16.7"]
   security_groups = [aws_security_group.private.id]
 
   tags = {
-    Name = "private-subnet-1-eip-172-20-16-6"
+    Name = "private-subnet-1-eip-172-20-16-7"
   }
 }
 
@@ -112,13 +112,13 @@ resource "aws_network_interface" "private-subnet-2-eip-172-20-32-5" {
   }
 }
 
-resource "aws_network_interface" "private-subnet-2-eip-172-20-32-6" {
+resource "aws_network_interface" "private-subnet-2-eip-172-20-32-7" {
   subnet_id       = aws_subnet.private-subnet-2.id
-  private_ips     = ["172.20.32.6"]
+  private_ips     = ["172.20.32.7"]
   security_groups = [aws_security_group.private.id]
 
   tags = {
-    Name = "private-subnet-2-eip-172-20-32-6"
+    Name = "private-subnet-2-eip-172-20-32-7"
   }
 }
 
