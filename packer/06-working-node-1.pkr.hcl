@@ -11,7 +11,7 @@ source "amazon-ebs" "ubuntu-kubernetes-the-hard-way-working-node-1" {
 }
 
 build {
-  name = "k8s-working-node-01"
+  name = "k8s-working-node-1"
   sources = [
     "source.amazon-ebs.ubuntu-kubernetes-the-hard-way-working-node-1"
   ]

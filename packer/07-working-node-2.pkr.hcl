@@ -76,7 +76,7 @@ build {
   }
 
   provisioner "file" { //replace
-    sources     = ["/tmp/kthw-certs/kubelet.service-0"]
+    sources     = ["/tmp/kthw-certs/kubelet.service-2"]
     destination = "/tmp/services/kubelet.service"
   }
 
