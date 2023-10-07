@@ -18,13 +18,13 @@ build {
 
   provisioner "shell" {
     inline = ["echo WAIT FOR CLOUD_INIT FINISH",
-      "cloud-init status --wait"]
+    "cloud-init status --wait"]
   }
 
   provisioner "shell" {
     inline = [
-      "echo set debconf to Noninteractive", 
-      "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections" ]
+      "echo set debconf to Noninteractive",
+    "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections"]
   }
 
   provisioner "shell" {
@@ -43,14 +43,14 @@ build {
       "sudo mkdir -p /var/run/kubernetes",
       "sudo mkdir -p /etc/containerd/",
       "sudo chown ubuntu:ubuntu /etc/containerd/",
-      "mkdir -p /tmp/services"]
+    "mkdir -p /tmp/services"]
   }
 
 
   provisioner "file" { // replace
     sources = ["/tmp/kthw-certs/ca.pem",
       "/tmp/kthw-certs/working-node-2-key.pem",
-    "/tmp/kthw-certs/working-node-2.pem"] 
+    "/tmp/kthw-certs/working-node-2.pem"]
     destination = "/etc/kubernetes/certs/"
   }
 
@@ -60,18 +60,18 @@ build {
     destination = "/etc/kubernetes/config/"
   }
 
-  provisioner "file" { 
-    sources = ["/tmp/kthw-certs/config.toml"]
+  provisioner "file" {
+    sources     = ["/tmp/kthw-certs/config.toml"]
     destination = "/etc/containerd/"
   }
 
   provisioner "file" { //replace
-    sources = ["/tmp/kthw-certs/kubelet-config.yaml-2"]
+    sources     = ["/tmp/kthw-certs/kubelet-config.yaml-2"]
     destination = "/var/lib/kubelet/kubelet-config.yaml"
   }
 
   provisioner "file" {
-    sources = ["/tmp/kthw-certs/kube-proxy-config.yaml"]
+    sources     = ["/tmp/kthw-certs/kube-proxy-config.yaml"]
     destination = "/var/lib/kube-proxy/kube-proxy-config.yaml"
   }
 
@@ -81,8 +81,8 @@ build {
   }
 
   provisioner "file" {
-    sources     = ["/tmp/kthw-certs/containerd.service",
-      "/tmp/kthw-certs/kube-proxy.service"]
+    sources = ["/tmp/kthw-certs/containerd.service",
+    "/tmp/kthw-certs/kube-proxy.service"]
     destination = "/tmp/services/"
   }
 
@@ -108,7 +108,7 @@ build {
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
       "sudo apt update",
-      "sudo apt install -y socat conntrack ipset"]
+    "sudo apt install -y socat conntrack ipset"]
   }
 
   provisioner "shell" { // kubectl kube-proxy kubelet
@@ -122,7 +122,7 @@ build {
       "sudo mv /tmp/k8s-server-components/kubernetes/server/bin/kubectl /usr/local/bin/",
       "sudo rm -rf /tmp/k8s-server-components"
     ]
-  }  
+  }
 
   provisioner "shell" { // cni-plugins
     inline = [
@@ -132,7 +132,7 @@ build {
       "sudo tar -xvf cni-plugins-linux-amd64-v1.3.0.tgz -C /opt/cni/bin/",
       "sudo rm -rf /tmp/cni-plugins"
     ]
-  }  
+  }
 
   provisioner "shell" { //runc runsc
     inline = [
@@ -145,7 +145,7 @@ build {
       "sudo mv /tmp/runc-files/runsc /tmp/runc-files/runc /usr/local/bin/",
       "sudo rm -rf /tmp/runc-files/"
     ]
-  }  
+  }
 
   provisioner "shell" { // crictl
     inline = [
@@ -155,7 +155,7 @@ build {
       "sudo tar -xvf crictl-v1.28.0-linux-amd64.tar.gz -C /usr/local/bin/",
       "sudo rm -rf /tmp/crictl-files/"
     ]
-  } 
+  }
 
   provisioner "shell" { // containerd
     inline = [
@@ -166,25 +166,25 @@ build {
       "sudo mv /tmp/containerd-files/bin/* /bin/",
       "sudo rm -rf /tmp/containerd-files/"
     ]
-  } 
+  }
 
-  provisioner "shell" { 
+  provisioner "shell" {
     inline = [
       "sudo systemctl daemon-reload",
       "sudo systemctl enable containerd kubelet kube-proxy",
       "sudo systemctl start containerd kubelet kube-proxy",
       "sudo systemctl status containerd kubelet kube-proxy"
     ]
-  } 
+  }
 
-  provisioner "shell" { 
+  provisioner "shell" {
     inline = [
       "sudo sysctl net.ipv4.conf.all.forwarding=1",
       "echo 'net.ipv4.conf.all.forwarding=1' | sudo tee -a /etc/sysctl.conf",
       "sudo systemctl stop apparmor",
       "sudo systemctl disable apparmor"
     ]
-  } 
+  }
 
   post-processor "manifest" { //replace
     output     = "manifest-working-node-2.json"

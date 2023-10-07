@@ -18,23 +18,23 @@ build {
 
   provisioner "shell" {
     inline = ["echo WAIT FOR CLOUD_INIT FINISH",
-      "cloud-init status --wait"]
+    "cloud-init status --wait"]
   }
 
   provisioner "shell" {
     inline = [
-      "echo set debconf to Noninteractive", 
-      "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections" ]
+      "echo set debconf to Noninteractive",
+    "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections"]
   }
-  
+
   provisioner "shell" {
     inline = [
-        "mkdir -p /home/ubuntu/manifest/",
-        "mkdir -p /home/ubuntu/.kube/" ]
+      "mkdir -p /home/ubuntu/manifest/",
+    "mkdir -p /home/ubuntu/.kube/"]
   }
 
   provisioner "file" {
-    sources = ["/tmp/kthw-certs/hosts"]
+    sources     = ["/tmp/kthw-certs/hosts"]
     destination = "/tmp/"
   }
 
@@ -45,20 +45,20 @@ build {
   }
 
   provisioner "file" {
-    sources = ["/tmp/kthw-certs/bastion.kubeconfig"]
+    sources     = ["/tmp/kthw-certs/bastion.kubeconfig"]
     destination = "/home/ubuntu/.kube/config"
   }
 
   provisioner "file" {
     sources = [
-        "/tmp/kthw-certs/clusterrole.yaml",
-        "/tmp/kthw-certs/clusterrolebinding.yaml",
-        "/tmp/kthw-certs/weave-daemonset-k8s.yaml",
-        "/tmp/kthw-certs/coredns.yaml"
+      "/tmp/kthw-certs/clusterrole.yaml",
+      "/tmp/kthw-certs/clusterrolebinding.yaml",
+      "/tmp/kthw-certs/weave-daemonset-k8s.yaml",
+      "/tmp/kthw-certs/coredns.yaml"
     ]
     destination = "/home/ubuntu/manifest/"
-  }  
-  
+  }
+
 
   provisioner "shell" {
     inline = ["cat /tmp/hosts | sudo tee -a /etc/hosts"]

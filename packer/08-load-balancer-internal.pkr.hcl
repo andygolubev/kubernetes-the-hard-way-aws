@@ -18,26 +18,26 @@ build {
 
   provisioner "shell" {
     inline = ["echo WAIT FOR CLOUD_INIT FINISH",
-      "cloud-init status --wait"]
+    "cloud-init status --wait"]
   }
 
   provisioner "shell" {
     inline = [
-      "echo set debconf to Noninteractive", 
-      "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections" ]
+      "echo set debconf to Noninteractive",
+    "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections"]
   }
-  
+
 
   provisioner "shell" {
     inline = ["echo current user $(whoami)",
       "sudo apt update",
       "sudo apt install -y nginx",
-      "sudo systemctl enable nginx"]
+    "sudo systemctl enable nginx"]
   }
 
   provisioner "file" {
     sources = ["/tmp/kthw-certs/nginx.conf",
-      "/tmp/kthw-certs/hosts"]
+    "/tmp/kthw-certs/hosts"]
     destination = "/tmp/"
   }
 

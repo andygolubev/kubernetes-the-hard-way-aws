@@ -18,13 +18,13 @@ build {
 
   provisioner "shell" {
     inline = ["echo WAIT FOR CLOUD_INIT FINISH",
-      "cloud-init status --wait"]
+    "cloud-init status --wait"]
   }
 
   provisioner "shell" {
     inline = [
-      "echo set debconf to Noninteractive", 
-      "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections" ]
+      "echo set debconf to Noninteractive",
+    "echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections"]
   }
 
   provisioner "shell" {
@@ -37,12 +37,12 @@ build {
       "sudo chown ubuntu:ubuntu /etc/etcd",
       "sudo mkdir -p /var/lib/etcd",
       "sudo chown ubuntu:ubuntu /var/lib/etcd",
-      "mkdir -p /tmp/services"]
+    "mkdir -p /tmp/services"]
   }
 
   provisioner "file" {
     sources = ["/tmp/kthw-certs/hosts",
-      "/tmp/kthw-certs/kubernetes.default.svc.cluster.local"]
+    "/tmp/kthw-certs/kubernetes.default.svc.cluster.local"]
     destination = "/tmp/"
   }
 
@@ -83,8 +83,8 @@ build {
   }
 
   provisioner "file" {
-    sources     = ["/tmp/kthw-certs/kube-controller-manager.service",
-      "/tmp/kthw-certs/kube-scheduler.service"]
+    sources = ["/tmp/kthw-certs/kube-controller-manager.service",
+    "/tmp/kthw-certs/kube-scheduler.service"]
     destination = "/tmp/services/"
   }
 
@@ -151,7 +151,7 @@ build {
       "sudo mv /tmp/kubernetes.default.svc.cluster.local /etc/nginx/sites-enabled/",
       "sudo systemctl enable nginx",
       "sudo systemctl restart nginx",
-      "sudo systemctl status nginx"]
+    "sudo systemctl status nginx"]
   }
 
   post-processor "manifest" {
