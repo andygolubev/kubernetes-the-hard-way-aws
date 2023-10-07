@@ -14,7 +14,7 @@ resource "aws_instance" "k8s-load-balancer-internal" {
   ami           = data.aws_ami.k8s-load-balancer-internal-ami.id
   instance_type = var.instance_type_load_balancer
 
-  key_name      = aws_key_pair.bastion-key.key_name
+  key_name = aws_key_pair.bastion-key.key_name
 
   network_interface {
     network_interface_id = aws_network_interface.private-subnet-0-eip-172-20-0-4.id

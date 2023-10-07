@@ -1,5 +1,5 @@
 resource "aws_eip" "eip-nat" {
-  domain   = "vpc"
+  domain = "vpc"
 }
 
 resource "aws_nat_gateway" "kubernetes-nat" {
