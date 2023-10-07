@@ -101,18 +101,6 @@ build {
     inline = ["ls -la /etc/kubernetes/certs /etc/etcd /etc/kubernetes/config /etc/systemd/system/"]
   }
 
-  # provisioner "shell" {
-  #   inline = ["sudo apt -y update",
-  #     "wget http://apt.puppet.com/puppet8-release-jammy.deb",
-  #     "sudo dpkg -i puppet8-release-jammy.deb",
-  #     "sudo apt -y update",
-  #     "sudo apt -y install puppet-agent",
-  #     "echo 'Defaults secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/opt/puppetlabs/bin' | sudo tee -a /etc/sudoers.d/extra",
-  #     "bash"
-  #   ]
-  # }
-
-
   provisioner "shell" {
     inline = [
       "mkdir -p /tmp/etcd-components",
@@ -166,28 +154,11 @@ build {
       "sudo systemctl status nginx"]
   }
 
-
-  # provisioner "shell" {
-  #   inline = ["kubectl get componentstatuses --kubeconfig /etc/kubernetes/config/admin.kubeconfig"]
-  # }
-
-
-# sudo ETCDCTL_API=3 etcdctl member list \
-#   --endpoints=https://127.0.0.1:2379 \
-#   --cacert=/etc/etcd/ca.pem \
-#   --cert=/etc/etcd/kubernetes.pem \
-#   --key=/etc/etcd/kubernetes-key.pem
-
-  # provisioner "puppet-masterless" {
-  #   manifest_file = "../puppet/configure-control-plane-0.pp"
-  # }
-
   post-processor "manifest" {
     output     = "manifest-control-plane-0.json"
     strip_path = true
   }
 
-  // jq -r '.builds[0].artifact_id|split(":")[1]' ./manifest.json 
 
 }
 

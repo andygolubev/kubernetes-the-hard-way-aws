@@ -1,19 +1,3 @@
-# data "aws_ami" "bastion" {
-#   most_recent = true
-#   owners      = ["099720109477"]
-
-#     filter {
-#         name   = "name"
-#         values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
-#     }
-
-#     filter {
-#         name = "virtualization-type"
-#         values = ["hvm"]
-#     }
-
-# }
-
 data "aws_ami" "k8s-bastion-host-ami" {
   most_recent = true
   owners      = ["self"]
@@ -41,22 +25,6 @@ resource "aws_instance" "bastion" {
             kubectl apply --kubeconfig /home/ubuntu/.kube/config -f /home/ubuntu/manifest/weave-daemonset-k8s.yaml
             kubectl apply --kubeconfig /home/ubuntu/.kube/config -f /home/ubuntu/manifest/coredns.yaml
             EOF
-
-
-  # connection {
-  #   type        = "ssh"
-  #   user        = "ubuntu"
-  #   host        = self.public_ip
-  #   private_key = file("/tmp/kthw-certs/bastion-key")
-  # }
-
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "kubectl apply -f /home/ubuntu/manifest/clusterrole.yaml",
-  #     "kubectl apply -f /home/ubuntu/manifest/clusterrolebinding.yaml",
-  #     "kubectl apply -f /home/ubuntu/manifest/weave-daemonset-k8s.yaml"
-  #   ]
-  # }
 
   tags = {
     Name = "Bastion Host"

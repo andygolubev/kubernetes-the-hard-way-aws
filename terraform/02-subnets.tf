@@ -126,10 +126,6 @@ resource "aws_network_interface" "private-subnet-2-eip-172-20-32-7" {
 
 # 172.20.48.0/20 (public subnet)
 
-# 172.20.48.4 - load-balancer-external
-
-
-
 resource "aws_subnet" "public-subnet-0" {
   vpc_id            = aws_vpc.kubernetes-vpc.id
   cidr_block        = "172.20.48.0/20"
@@ -140,12 +136,3 @@ resource "aws_subnet" "public-subnet-0" {
   }
 }
 
-resource "aws_network_interface" "public-subnet-0-eip-172-20-48-4" {
-  subnet_id       = aws_subnet.public-subnet-0.id
-  private_ips     = ["172.20.48.4"]
-  security_groups = [aws_security_group.public.id]
-
-  tags = {
-    Name = "public-subnet-0-eip-172-20-48-4"
-  }
-}

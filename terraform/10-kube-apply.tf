@@ -1,4 +1,0 @@
-
-
-//  kubectl apply cluster roles
-
